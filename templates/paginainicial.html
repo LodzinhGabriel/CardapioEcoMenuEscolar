@@ -1,5 +1,153 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1>Página inicial</h1>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesi-SP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/static/imgs/fundo.PNG') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+        .info {
+            max-width: 50%;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .info h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #333;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            cursor:default;
+        }
+        .info p {
+            font-size: 15px;
+            font-weight: bold;
+            color: red;
+            text-align: justify;
+            line-height: 1.5;
+            font-family: 'Arial Black', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            cursor: default;
+        }
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+        .login-tabs {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .login-tabs button {
+            background: none;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #333;
+        }
+        .login-tabs button.active {
+            font-weight: bold;
+            color: red;
+            border-bottom: 2px solid red;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            color: #333;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button.acessar {
+            width: 100%;
+            padding: 12px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        button.acessar:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="info">
+            <h2>Sesi - 185</h2>
+            <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
+        </div>
+        <div class="login-box">
+            <div class="login-tabs">
+                <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login Aluno</button>
+                <button id="btnAdm" onclick="toggleLogin('adm')">Login ADM</button>
+            </div>
+            <label for="email">EMAIL:</label>
+            <input type="email" id="email" placeholder="Digite seu email">
+            <label for="senha">SENHA:</label>
+            <input type="password" id="senha" placeholder="Digite sua senha">
+            <button class="acessar">Acessar</button>
+        </div>
+    </div>
+    <script>
+        function toggleLogin(tipo) {
+            document.getElementById('btnAluno').classList.remove('active');
+            document.getElementById('btnAdm').classList.remove('active');
+            
+            if (tipo === 'aluno') {
+                document.getElementById('btnAluno').classList.add('active');
+            } else {
+                document.getElementById('btnAdm').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
 {% endblock %}
