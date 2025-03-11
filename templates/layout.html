@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,8 +7,27 @@
     <title>Cardápio EcoMenu Escolar</title>
 
     <link rel="stylesheet" href="../static/css/style.css">
+
+    <style>
+            .header {
+            background-color: red;
+            color: white;
+            padding: 5px;
+            font-size: 30px;
+            font-weight: bold;
+            width: 99.4%;
+            text-align: center;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            cursor:default ;
+        
+        }
+    </style>
 </head>
 <body>
+    <div class="header">Sesi-SP</div>
     {% block content %}
     {% endblock %}
 </body>

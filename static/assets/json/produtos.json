@@ -1,0 +1,162 @@
+[
+    {
+        "id": "1",
+        "nome": "Teclado Mecânico Logitech G Pro X",
+        "marca": "Logitech",
+        "descricao": "Teclado mecânico compacto com switches hot-swappable, iluminação RGB personalizável e design de alta performance.",
+        "preco": 499.99,
+        "imagem": "../static/assets/produtos/logitechgprox.png"
+    },
+    {
+        "id": "2",
+        "nome": "Mouse Razer DeathAdder V2",
+        "marca": "Razer",
+        "descricao": "Mouse com sensor ótico de 20.000 DPI, design ergonômico e switches ópticos para maior durabilidade.",
+        "preco": 349.99,
+        "imagem": "../static/assets/produtos/razerdeathadderv2.png"
+    },
+    {
+        "id": "3",
+        "nome": "Monitor LG Ultragear 27GN950-B",
+        "marca": "LG",
+        "descricao": "Monitor de 27 polegadas, 4K, com taxa de atualização de 144Hz, ideal para jogos e produtividade.",
+        "preco": 4299.99,
+        "imagem": "../static/assets/produtos/lgutragear27.png"
+    },
+    {
+        "id": "4",
+        "nome": "Placa de Vídeo NVIDIA GeForce RTX 3080",
+        "marca": "NVIDIA",
+        "descricao": "Placa de vídeo com 10GB de VRAM GDDR6X, ideal para jogos em 4K e desempenho extremo em tarefas gráficas.",
+        "preco": 7999.99,
+        "imagem": "../static/assets/produtos/gtx3080.jpg"
+    },
+    {
+        "id": "5",
+        "nome": "Processador AMD Ryzen 5 5600X",
+        "marca": "AMD",
+        "descricao": "Processador de 6 núcleos e 12 threads, com desempenho superior para jogos e multitarefa.",
+        "preco": 1299.99,
+        "imagem": "../static/assets/produtos/amdryzen5.jpg"
+    },
+    {
+        "id": "6",
+        "nome": "Headset SteelSeries Arctis 7",
+        "marca": "SteelSeries",
+        "descricao": "Headset sem fio com áudio surround 7.1, microfone com cancelamento de ruído e bateria de longa duração.",
+        "preco": 1299.00,
+        "imagem": "../static/assets/produtos/steelsteriesarctis7.jpg"
+    },
+    {
+        "id": "7",
+        "nome": "Cooler Corsair iCUE H100i Elite Capellix",
+        "marca": "Corsair",
+        "descricao": "Sistema de refrigeração líquida para CPU, com dois ventiladores de 120mm e iluminação RGB.",
+        "preco": 1099.99,
+        "imagem": "../static/assets/produtos/corsairicueh100i.jpg"
+    },
+    {
+        "id": "8",
+        "nome": "Teclado HyperX Alloy FPS Pro",
+        "marca": "HyperX",
+        "descricao": "Teclado mecânico compacto, com switches Cherry MX, iluminação vermelha e design robusto.",
+        "preco": 479.99,
+        "imagem": "../static/assets/produtos/hyperxalloy.jpg"
+    },
+    {
+        "id": "9",
+        "nome": "Mouse Logitech G Pro X Superlight",
+        "marca": "Logitech",
+        "descricao": "Mouse ultraleve com sensor HERO de 25.600 DPI, ideal para gamers profissionais.",
+        "preco": 549.99,
+        "imagem": "../static/assets/produtos/logitechgprox1.png"
+    },
+    {
+        "id": "10",
+        "nome": "Monitor Samsung Odyssey G7",
+        "marca": "Samsung",
+        "descricao": "Monitor curvo de 27 polegadas, QHD, 240Hz, ideal para jogos competitivos.",
+        "preco": 3499.99,
+        "imagem": "../static/assets/produtos/sansungodsseyg7.jpeg"
+    },
+    {
+        "id": "11",
+        "nome": "Placa de Vídeo ASUS TUF Gaming RTX 3070",
+        "marca": "ASUS",
+        "descricao": "Placa de vídeo com 8GB de VRAM, com excelente desempenho para jogos em alta resolução e tarefas profissionais.",
+        "preco": 5499.99,
+        "imagem": "../static/assets/produtos/tufrtx3070.png"
+    },
+    {
+        "id": "12",
+        "nome": "Processador Intel Core i7-12700K",
+        "marca": "Intel",
+        "descricao": "Processador de 12 núcleos e 20 threads, com alto desempenho para jogos e criação de conteúdo.",
+        "preco": 2499.00,
+        "imagem": "../static/assets/produtos/intelcorei7.jpg"
+    },
+    {
+        "id": "13",
+        "nome": "Headset Razer Kraken V3",
+        "marca": "Razer",
+        "descricao": "Headset com áudio surround 7.1, drivers de 50mm e microfone cardioide com cancelamento de ruído.",
+        "preco": 699.99,
+        "imagem": "../static/assets/produtos/razenkrakerv3.jpg"
+    },
+    {
+        "id": "14",
+        "nome": "Cooler Noctua NH-D15",
+        "marca": "Noctua",
+        "descricao": "Cooler a ar com design de dupla torre, ideal para overclocking e refrigeração silenciosa.",
+        "preco": 879.99,
+        "imagem": "../static/assets/produtos/noctuanhd15.jpg"
+    },
+    {
+        "id": "15",
+        "nome": "Teclado Corsair K95 RGB Platinum XT",
+        "marca": "Corsair",
+        "descricao": "Teclado mecânico com switches Cherry MX, iluminação RGB e teclas dedicadas para macro e multimídia.",
+        "preco": 1099.99,
+        "imagem": "../static/assets/produtos/corsairk95.jpg"
+    },
+    {
+        "id": "16",
+        "nome": "Mouse SteelSeries Rival 600",
+        "marca": "SteelSeries",
+        "descricao": "Mouse com sensor duplo de 12.000 DPI e 256 pesos ajustáveis, ideal para gamers profissionais.",
+        "preco": 449.99,
+        "imagem": "../static/assets/produtos/steelseriesrival600.png"
+    },
+{
+        "id": "17",
+        "nome": "Monitor Acer Predator X34",
+        "marca": "Acer",
+        "descricao": "Monitor curvo ultrawide de 34 polegadas, resolução 1440p, com taxa de atualização de 120Hz, ideal para jogos e produtividade.",
+        "preco": 4799.99,
+        "imagem": "../static/assets/produtos/acerpredatorx34.jpg"
+    },
+    {
+        "id": "18",
+        "nome": "Placa de Vídeo MSI GeForce RTX 4090",
+        "marca": "MSI",
+        "descricao": "Placa de vídeo com 24GB de VRAM, desempenho extremo para 4K, jogos e trabalho criativo.",
+        "preco": 15999.99,
+        "imagem": "../static/assets/produtos/msigeforcertx4090.jpg"
+    },
+    {
+        "id": "19",
+        "nome": "Processador Intel Core i9-13900K",
+        "marca": "Intel",
+        "descricao": "Processador de 24 núcleos e 32 threads, com alto desempenho para jogos, edição de vídeo e multitarefa intensa.",
+        "preco": 4599.00,
+        "imagem": "../static/assets/produtos/intelcorei913900k.jpeg"
+    },
+    {
+        "id": "20",
+        "nome": "Headset Logitech G Pro X Wireless",
+        "marca": "Logitech",
+        "descricao": "Headset sem fio com áudio 7.1 e microfone Blue VO!CE para comunicação clara, ideal para jogadores.",
+        "preco": 1299.99,
+        "imagem": "../static/assets/produtos/logitechgprox2.png"
+    }
+]

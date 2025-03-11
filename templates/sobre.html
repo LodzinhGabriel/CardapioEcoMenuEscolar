@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Sobre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.menu {
+    width: 30px;
+    height: 5px;
+    background-color: black;
+}
+
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    width: 300px;
+    height: 40px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.circle {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+h1 {
+    font-size: 40px;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.content {
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    text-align: justify;
+}
+</style>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="menu"></div>
+            <div class="menu"></div>
+            <div class="menu"></div>
+            <div class="top-bar"></div>
+            <div class="circle"></div>
+        </div>
+        <h1>Sobre</h1>
+        <div class="content">
+            <p>O Serviço Social da Indústria SESI é uma entidade de direito privado, nos termos da lei civil, estruturada em base federativa para prestar assistência social aos trabalhadores industriais e de atividades assemelhadas em todo o País.</p>
+            <p>O SESI exerce papel fundamental no desenvolvimento social brasileiro, colaborando efetivamente com a melhoria da qualidade de vida do trabalhador da indústria, seus familiares e comunidade em geral por meio de seus serviços nos campos da educação, saúde, esporte, cultura, nutrição e outros.</p>
+            <p>É, também, parceiro das empresas, fornecendo apoio ativo na implantação e desenvolvimento de projetos de benefícios sociais para funcionários.</p>
+        </div>
+    </div>
+</body>
+
+</html>
