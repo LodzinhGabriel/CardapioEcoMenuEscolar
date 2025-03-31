@@ -1,7 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,6 +12,37 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            background-color: red;
+            color: white;
+            padding: 5.9px;
+            font-size: 30px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+        }
+        #home {
+            background: url('/static/imgs/fundo.PNG') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -58,7 +88,13 @@
             top: 60%;
         }
 
-        .container {
+        #objetivo {
+            background: url('/static/imgs/fundo2.PNG') no-repeat center center/cover;
+            position: relative;
+            height: 650px;
+        }
+        
+        .container1 {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -72,6 +108,8 @@
             max-width: 50%;
             text-align: left;
             padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
             border-radius: 15px;
             padding: 0;
         }
@@ -86,6 +124,7 @@
             color: white;
             cursor:default;
             margin: 0px;
+            cursor: default;
         }
         .info p {
             font-size: 18px;
@@ -102,7 +141,8 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-            width: 350px;
+            width: 400px;
+            height: 300 px;
         }
         .login-tabs {
             display: flex;
@@ -110,6 +150,7 @@
             border-bottom: 2px solid #ccc;
             margin-bottom: 20px;
             padding-bottom: 10px;
+            
         }
         .login-tabs button {
             background: none;
@@ -124,7 +165,30 @@
             color: red;
             border-bottom: 2px solid red;
         }
-        label {
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 90px;
+            border-radius: 12px;
+            max-width: 480px;
+            text-align: left;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+      
+        .titulo {
+            background: black;
+            color: white;
+            padding: 20px 25px;
+            font-size: 1.7em;
+            font-weight: bold;
+            display: inline-block;
+            position: absolute;
+            top: -25px;
+            left: 15px;
+            border-radius: 8px;
+        }
+            .label {
             font-weight: bold;
             display: block;
             margin-top: 15px;
@@ -178,29 +242,47 @@
             <div class="login-tabs">
                 <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login Aluno</button>
                 <button id="btnAdm" onclick="toggleLogin('adm')">Login ADM</button>
+    <div id="home" class="section">
+        <div class="container1">
+            <div class="info">
+                <h2>Sesi - 185</h2>
+                <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
             </div>
-            <label for="email">EMAIL:</label>
-            <input type="email" id="email" placeholder="Digite seu email">
-            <label for="senha">SENHA:</label>
-            <input type="password" id="senha" placeholder="Digite sua senha">
-            <button class="acessar">Acessar</button>
+            <div class="login-box">
+                <div class="login-tabs">
+                    <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login</button>
+                    <button id="btnAdm" onclick="toggleLogin('adm')">Login ADM</button>
+                </div>
+                <label for="email">EMAIL:</label>
+                <input type="email" id="email" placeholder="Digite seu email">
+                <label for="senha">SENHA:</label>
+                <input type="password" id="senha" placeholder="Digite sua senha">
+                <button class="acessar">Acessar</button>
+            </div>
+        </div>
+    </div>
+    <div id="objetivo" class="section">
+        <div class="container">
+            <div class="titulo">Objetivo</div>
+            <h2>Desenvolver um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</h2>
         </div>
     </div>
     <script>
+        window.addEventListener('wheel', function(event) {
+            if (event.deltaY > 0) {
+                document.getElementById('objetivo').scrollIntoView({ behavior: 'smooth' });
+            } else if (event.deltaY < 0) {
+                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
         function toggleLogin(tipo) {
             document.getElementById('btnAluno').classList.remove('active');
             document.getElementById('btnAdm').classList.remove('active');
-            
-            if (tipo === 'aluno') {
-                document.getElementById('btnAluno').classList.add('active');
-            } else {
-                document.getElementById('btnAdm').classList.add('active');
-            }
+            document.getElementById('btn' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('active');
         }
     </script>
 </body>
 </html>
-
 
 
 {% endblock %}
