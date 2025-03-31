@@ -13,17 +13,56 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: url('/static/imgs/fundo.PNG') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        .fundo {
+            background: url('/static/imgs/fundo.PNG') no-repeat center center;
+            background-size: cover;
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .detalhe-bola {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 100%;
+            margin: 0;
+            z-index: -1;
+        }
+
+        #vermelha {
+            background-color: red;
+            position: absolute;
+            left: 55%;
+            top: 35%;
+        }
+
+        #vermelha-escura{
+            background-color: maroon;
+            position: absolute;
+            left: 85%;
+            top: 8%;
+        }
+
+        #branca {
+            background-color: white;
+            position: absolute;
+            left: 73%;
+            top: 60%;
+        }
+
         .container {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            position: relative;
             align-items: center;
             width: 80%;
             max-width: 1200px;
@@ -32,30 +71,31 @@
         .info {
             max-width: 50%;
             text-align: left;
-            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 0;
         }
         .info h2 {
-            font-size: 36px;
+            font-size: 48px;
             margin-bottom: 10px;
             color: #333;
             font-family: 'Arial Black', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: white;
             cursor:default;
+            margin: 0px;
         }
         .info p {
-            font-size: 15px;
-            font-weight: bold;
-            color: red;
+            font-size: 18px;
+            color: white;
             text-align: justify;
             line-height: 1.5;
-            font-family: 'Arial Black', sans-serif;
+            font-family: 'Arial', sans-serif;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             cursor: default;
+            margin: 0px;
         }
         .login-box {
             background: white;
@@ -116,12 +156,25 @@
 </head>
 <body>
 
+    <div class="fundo"></div>
+
     <div class="container">
         <div class="info">
             <h2>Sesi - 185</h2>
             <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
         </div>
+        
+        <div>
+            <div class="detalhe-bola" id="vermelha"></div>
+            <div class="detalhe-bola" id="branca"></div>
+            <div class="detalhe-bola" id="vermelha-escura"></div>
+        </div>
+
+        
+        
         <div class="login-box">
+            
+
             <div class="login-tabs">
                 <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login Aluno</button>
                 <button id="btnAdm" onclick="toggleLogin('adm')">Login ADM</button>
