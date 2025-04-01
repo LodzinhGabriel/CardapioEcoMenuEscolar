@@ -24,4 +24,4 @@ def nutri():
 
 @app.route("/cardapio")
 def cardapio():
-    return render_template("")
+    return render_template("cardapio.html")
