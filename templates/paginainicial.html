@@ -49,22 +49,12 @@
             align-items: center;
         }
 
-        .fundo {
-            background: url('/static/imgs/fundo.PNG') no-repeat center center;
-            background-size: cover;
-            width: 100%;
-            height: 100vh;
-            position: absolute;
-            z-index: -1;
-        }
-
         .detalhe-bola {
             position: relative;
             width: 300px;
             height: 300px;
             border-radius: 100%;
             margin: 0;
-            z-index: -1;
         }
 
         #vermelha {
@@ -93,7 +83,6 @@
             position: relative;
             height: 650px;
         }
-        
         .container1 {
             display: flex;
             flex-direction: row;
@@ -108,7 +97,7 @@
             max-width: 50%;
             text-align: left;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: transparent;
             padding: 30px;
             border-radius: 15px;
             padding: 0;
@@ -142,7 +131,8 @@
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
             width: 400px;
-            height: 300 px;
+            height: 300px;
+            z-index: 1;
         }
         .login-tabs {
             display: flex;
@@ -174,6 +164,10 @@
             text-align: left;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
             position: relative;
+        }
+
+        .texto-objetivo {
+            background: linear-gradient(to left, rgb(153, 35, 35));
         }
       
         .titulo {
@@ -220,34 +214,19 @@
 </head>
 <body>
 
-    <div class="fundo"></div>
-
-    <div class="container">
-        <div class="info">
-            <h2>Sesi - 185</h2>
-            <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
-        </div>
-        
-        <div>
-            <div class="detalhe-bola" id="vermelha"></div>
-            <div class="detalhe-bola" id="branca"></div>
-            <div class="detalhe-bola" id="vermelha-escura"></div>
-        </div>
-
-        
-        
-        <div class="login-box">
-            
-
-            <div class="login-tabs">
-                <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login Aluno</button>
-                <button id="btnAdm" onclick="toggleLogin('adm')">Login ADM</button>
     <div id="home" class="section">
         <div class="container1">
             <div class="info">
                 <h2>Sesi - 185</h2>
                 <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
             </div>
+
+            <div>
+                <div class="detalhe-bola" id="vermelha"></div>
+                <div class="detalhe-bola" id="branca"></div>
+                <div class="detalhe-bola" id="vermelha-escura"></div>    
+            </div>
+            
             <div class="login-box">
                 <div class="login-tabs">
                     <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login</button>
@@ -262,7 +241,7 @@
         </div>
     </div>
     <div id="objetivo" class="section">
-        <div class="container">
+        <div class="container" id="texto-objetivo">
             <div class="titulo">Objetivo</div>
             <h2>Desenvolver um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</h2>
         </div>
