@@ -6,14 +6,6 @@ app = Flask(__name__)
 def pagina_incial():
     return render_template("paginainicial.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
-@app.route("/cadastrarse")
-def cadastrarse():
-    return render_template("cadastrarse.html")
-
 @app.route("/aluno")
 def aluno():
     return render_template("homealuno.html")
