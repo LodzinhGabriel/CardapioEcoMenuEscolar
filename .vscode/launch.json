@@ -19,8 +19,12 @@
                 "--no-debugger",
                 "--no-reload"
             ],
+<<<<<<< HEAD
             "jinja": true,
             "autoStartBrowser": false
+=======
+            "jinja": true
+>>>>>>> origin/vitor.b
         }
     ]
 }
