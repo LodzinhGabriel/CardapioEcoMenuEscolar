@@ -8,12 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sesi-SP</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
 
         .header {
             background-color: red;
@@ -48,6 +42,36 @@
             flex-direction: column;
             align-items: center;
         }
+
+        .detalhe-bola {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 100%;
+            margin: 0;
+        }
+
+        #vermelha {
+            background-color: red;
+            position: absolute;
+            left: 55%;
+            top: 35%;
+        }
+
+        #vermelha-escura{
+            background-color: maroon;
+            position: absolute;
+            left: 85%;
+            top: 8%;
+        }
+
+        #branca {
+            background-color: white;
+            position: absolute;
+            left: 73%;
+            top: 60%;
+        }
+
         #objetivo {
             background: url('/static/imgs/fundo2.PNG') no-repeat center center/cover;
             position: relative;
@@ -57,6 +81,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            position: relative;
             align-items: center;
             width: 80%;
             max-width: 1200px;
@@ -65,30 +90,34 @@
         .info {
             max-width: 50%;
             text-align: left;
-            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            background: transparent;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 0;
         }
         .info h2 {
-            font-size: 36px;
+            font-size: 48px;
             margin-bottom: 10px;
             color: #333;
             font-family: 'Arial Black', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: white;
+            cursor:default;
+            margin: 0px;
             cursor: default;
         }
         .info p {
-            font-size: 15px;
-            font-weight: bold;
-            color: red;
+            font-size: 18px;
+            color: white;
             text-align: justify;
             line-height: 1.5;
-            font-family: 'Arial Black', sans-serif;
+            font-family: 'Arial', sans-serif;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             cursor: default;
+            margin: 0px;
         }
         .login-box {
             background: white;
@@ -96,7 +125,8 @@
             border-radius: 10px;
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
             width: 400px;
-            height: 300 px;
+            height: 300px;
+            z-index: 1;
         }
         .login-tabs {
             display: flex;
@@ -128,6 +158,24 @@
             text-align: left;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
             position: relative;
+        }
+
+        .texto-objetivo {
+            background: linear-gradient(0.25turn, rgb(153, 35, 35), 75%, rgba(153, 35, 35, 0));
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .texto-objetivo h1 {
+            color: white;
+            font-size: 40px;
+        }
+
+        .texto-objetivo p {
+            color: white;
+            width: 400px;
         }
       
         .titulo {
@@ -180,6 +228,13 @@
                 <h2>Sesi - 185</h2>
                 <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
             </div>
+
+            <div>
+                <div class="detalhe-bola" id="vermelha"></div>
+                <div class="detalhe-bola" id="branca"></div>
+                <div class="detalhe-bola" id="vermelha-escura"></div>    
+            </div>
+            
             <div class="login-box">
                 <div class="login-tabs">
                     <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login</button>
@@ -194,10 +249,13 @@
         </div>
     </div>
     <div id="objetivo" class="section">
-        <div class="container">
-            <div class="titulo">Objetivo</div>
-            <h2>Desenvolver um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</h2>
+        <div class="texto-objetivo">
+            <h1>UM CARDÁPIO PARA TODOS</h1>
+            <p>Fique atualizado sobre quais comidas deliciosas estarão no cardapio dos dias letivos da rede SESI-SP!</p>
+            <p>Uma interação mais próxima entre a nutrição e os alunos da rede contribuindo para uma melhor colaboração e organização!</p>
+            <p>Desenvolvemos um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</p>
         </div>
+
     </div>
     <script>
         window.addEventListener('wheel', function(event) {
