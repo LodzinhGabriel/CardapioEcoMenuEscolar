@@ -10,6 +10,7 @@ def pagina_incial():
 def aluno():
     return render_template("homealuno.html")
 
+
 @app.route("/nutri")
 def nutri():
     return render_template("homenutri.html")
