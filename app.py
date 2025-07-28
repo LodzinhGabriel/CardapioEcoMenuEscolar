@@ -14,7 +14,6 @@ def aluno():
 def cadastrarse():
     return render_template("cadastrarse.html")
 
-<<<<<<< HEAD
 @app.route("/nutri")
 def nutri():
     return render_template("homenutri.html")
@@ -26,13 +25,11 @@ def cardapio():
 @app.route("/cardapioadm")
 def cardapioadm():
     return render_template("cardapioadm.html")
-=======
+
 @app.route("/calendario")
 def calendario():
     return render_template("calendario.html")
 
-
 @app.route("/sobre")
 def sobre():
     return render_template("sobre.html")
->>>>>>> origin/vitor.b
