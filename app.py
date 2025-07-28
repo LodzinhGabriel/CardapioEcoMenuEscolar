@@ -13,3 +13,12 @@ def login():
 @app.route("/cadastrarse")
 def cadastrarse():
     return render_template("cadastrarse.html")
+
+@app.route("/calendario")
+def calendario():
+    return render_template("calendario.html")
+
+
+@app.route("/sobre")
+def sobre():
+    return render_template("sobre.html")
