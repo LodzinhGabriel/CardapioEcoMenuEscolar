@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/static/assets/logo.PNG"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio EcoMenu Escolar</title>
+
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <style>
+
+    /* TOPO */
+    .top-bar {
+      background-color: #c80000;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1100;
+    }
+
+    .logo {
+      padding: 4px 16px;
+    }
+
+    .logo img {
+      height: 55px;
+      object-fit: contain;
+    }
+
+    /* ÍCONE MENU */
+    .menu-icon {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      z-index: 1101;
+      transition: opacity 0.3s ease;
+    }
+
+    .menu-icon.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .menu-icon div {
+      width: 24px;
+      height: 4px;
+      background: black;
+      border-radius: 3px;
+    }
+
+    /* MENU LATERAL */
+    .side-menu {
+      position: fixed;
+      left: -220px;
+      top: 70px; /* Aqui: menu começa logo abaixo da navbar */
+      width: 220px;
+      height: calc(100% - 70px); /* altura total da tela menos a navbar */
+      background-color: #b40000;
+      color: white;
+      transition: left 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    .side-menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+
+    .side-menu a:hover {
+      background-color: #a00000;
+    }
+
+    .menu-header {
+      font-weight: bold;
+      text-align: center;
+      padding: 12px 0;
+      font-size: 17px;
+      background-color: #a00000;
+    }
+
+    .menu-divider {
+      height: 1px;
+      background-color: white;
+      margin: 5px 0;
+    }
+
+    .sobre-link {
+      background-color: #c80000;
+      text-align: center;
+      font-weight: bold;
+    }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+   <!-- MENU LATERAL -->
+  <div id="sideMenu" class="side-menu">
+    <div>
+      <div class="menu-header">Menu ADM</div>
+      <div class="menu-divider"></div>
+      <a href="#">Perfil</a>
+      <a href="#">Editar Cardápio</a>
+      <a href="#">Editar Curiosidades</a>
+      <a href="#">Editar Desperdício</a>
+      <a href="#">Editar Enquete</a>
+      <a href="#">Editar Aviso</a>
+    </div>
+    <div>
+      <div class="menu-divider"></div>
+      <a href="#" class="sobre-link">Sobre</a>
+      <div class="menu-divider"></div>
+    </div>
+  </div>
+
+  <!-- TOPO -->
+  <div class="top-bar">
+    <div class="menu-icon" id="menuToggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="logo">
+      <img src="/static/imgs/logosesiadm.png" alt="Logo SESI" />
+    </div>
+  </div>
+
+<!-- SCRIPT DO MENU -->
+  <script>
+    const menuIcon = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+
+    menuIcon.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (sideMenu.style.left === '0px') {
+        sideMenu.style.left = '-220px';
+        menuIcon.classList.remove('hidden');
+      } else {
+        sideMenu.style.left = '0px';
+        menuIcon.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (
+        sideMenu.style.left === '0px' &&
+        !sideMenu.contains(event.target) &&
+        event.target !== menuIcon
+      ) {
+        sideMenu.style.left = '-220px';
+        menuIcon.classList.remove('hidden');
+      }
+    });
+  </script>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

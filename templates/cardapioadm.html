@@ -1,61 +1,21 @@
+{% extends 'layoutadm.html' %}
 
 {% block content %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <link rel="shortcut icon" type="image/png" href="/static/assets/logo.PNG"/>
+  <meta charset="UTF-8" />
   <title>Editar Cardápio</title>
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: url('/static/imgs/fundoadm.png') 
-
-    }
-
-    /* TOPO */
-    .top-bar {
-      background-color: #c80000;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .logo {
-   
-      padding: 4px 16px;
-      border-left: 4px solid #c80000;
-      border-right: 4px solid #c80000;
-    }
-
-    .logo img {
-      height: 55px; /* Adjust as necessary for clarity */
-      object-fit: contain;
-    }
-
-    /* MENU HAMBÚRGUER */
-    .menu-icon {
-      position: absolute;
-      left: 20px;
-      top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .menu-icon div {
-      width: 24px;
-      height: 5px;
-      background: black;
-      border-radius: 3px;
+      background: url('/static/imgs/fundoadm.png');
     }
 
     /* CONTEÚDO PRINCIPAL */
@@ -63,7 +23,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 70px 20px;
+      padding: 80px 20px;
     }
 
     .edit-title {
@@ -127,9 +87,10 @@
       background-color: #f0f0f0;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 750px) {
       .upload-box {
         width: 100%;
+        height: 280px;
       }
 
       .buttons {
@@ -146,29 +107,17 @@
 </head>
 <body>
 
-  <!-- TOPO COM LOGO E MENU -->
-  <div class="top-bar">
-    <div class="menu-icon">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="logo">
-    
-      <img src="/static/imgs/logosesiadm.png" alt="Logo SESI">
-    </div>
-  </div>
 
-
+  <!-- CONTEÚDO PRINCIPAL -->
   <div class="container">
     <div class="edit-title">
-      <img src="/static/imgs/editar_simbolo.png" alt="Lápis">
+      <img src="/static/imgs/editar_simbolo.png" alt="Lápis" />
       Editar cardápio
     </div>
 
     <div class="upload-box">
-      <img src="/static/imgs/cloud-upload.webp" alt="Upload">
-      <p>Serão aceitos os arquivos em:<br><strong>Png, Jpeg e Pdf</strong></p>
+      <img src="/static/imgs/cloud-upload.webp" alt="Upload" />
+      <p>Serão aceitos os arquivos em:<br /><strong>PNG, JPEG e PDF</strong></p>
     </div>
 
     <div class="buttons">
@@ -176,6 +125,7 @@
       <button class="cancelar">Cancelar</button>
     </div>
   </div>
+
 
 </body>
 </html>
