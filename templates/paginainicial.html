@@ -7,25 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sesi-SP</title>
-    <style>
-
-        .header {
-            background-color: red;
-            color: white;
-            padding: 5.9px;
-            font-size: 30px;
-            font-weight: bold;
-            width: 100%;
-            text-align: center;
-            font-family: 'Arial Black', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
+    <style> 
 
         .section {
             width: 100%;
@@ -33,7 +15,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 60px;
+            
         }
         #home {
             background: url('/static/imgs/fundo.PNG') no-repeat center center fixed;
@@ -76,7 +58,23 @@
             background: url('/static/imgs/fundo2.PNG') no-repeat center center/cover;
             position: relative;
             height: 650px;
+            margin: 0;
+            padding: 0;
         }
+
+        .gradient-container {
+            background-color: rgba(153, 35, 35, 0.75);
+            width: 100%;
+            height: 100%;
+        }
+
+        .up-gradient-container {
+            position: absolute;
+            background: linear-gradient(0turn, rgb(153, 35, 35), 50%, rgba(153, 35, 35, 0));
+            width: 100%;
+            height: 100%;
+        }
+
         .container1 {
             display: flex;
             flex-direction: row;
@@ -85,7 +83,6 @@
             align-items: center;
             width: 80%;
             max-width: 1200px;
-            margin-top: 50px;
         }
         .info {
             max-width: 50%;
@@ -161,21 +158,23 @@
         }
 
         .texto-objetivo {
-            background: linear-gradient(0.25turn, rgb(153, 35, 35), 75%, rgba(153, 35, 35, 0));
+            
             width: 100%;
             height: 100%;
-            padding: 20px;
             margin: 0;
         }
         
         .texto-objetivo h1 {
             color: white;
             font-size: 40px;
+            padding-left: 20px;
         }
 
         .texto-objetivo p {
+            
             color: white;
             width: 400px;
+           padding-left: 20px;
         }
       
         .titulo {
@@ -223,7 +222,11 @@
 <body>
 
     <div id="home" class="section">
+        <div class="up-gradient-container">
+                
+            </div>
         <div class="container1">
+            
             <div class="info">
                 <h2>Sesi - 185</h2>
                 <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
@@ -237,8 +240,8 @@
             
             <div class="login-box">
                 <div class="login-tabs">
-                    <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Login</button>
-                    <button id="btnAdm" onclick="toggleLogin('adm')">Login ADM</button>
+                    <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Aluno</button>
+                    <button id="btnAdm" onclick="toggleLogin('adm')">Funcionário</button>
                 </div>
                 <form action="">
                     <label for="email">EMAIL:</label>
@@ -251,27 +254,27 @@
             </div>
         </div>
     </div>
+    <div style="background-color: rgb(153, 35, 35); width: 100%; height: 150px;"></div>
     <div id="objetivo" class="section">
-        <div class="texto-objetivo">
-            <h1>UM CARDÁPIO PARA TODOS</h1>
-            <p>Fique atualizado sobre quais comidas deliciosas estarão no cardapio dos dias letivos da rede SESI-SP!</p>
-            <p>Uma interação mais próxima entre a nutrição e os alunos da rede contribuindo para uma melhor colaboração e organização!</p>
-            <p>Desenvolvemos um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</p>
+        <div class="gradient-container">
+            <div class="texto-objetivo">
+                <h1>UM CARDÁPIO PARA TODOS</h1>
+                <p>Fique atualizado sobre quais comidas deliciosas estarão no cardapio dos dias letivos da rede SESI-SP!</p>
+                <p>Uma interação mais próxima entre a nutrição e os alunos da rede contribuindo para uma melhor colaboração e organização!</p>
+                <p>Desenvolvemos um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</p>
+            </div>
         </div>
-
     </div>
     <script>
-        window.addEventListener('wheel', function(event) {
-            if (event.deltaY > 0) {
-                document.getElementById('objetivo').scrollIntoView({ behavior: 'smooth' });
-            } else if (event.deltaY < 0) {
-                document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-            }
-        });
         function toggleLogin(tipo) {
             document.getElementById('btnAluno').classList.remove('active');
             document.getElementById('btnAdm').classList.remove('active');
             document.getElementById('btn' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('active');
+        }
+
+        function grantAcess() {
+            const email = document.getElementById('email')
+            const senha = document.getElementById('senha')
         }
     </script>
 </body>
