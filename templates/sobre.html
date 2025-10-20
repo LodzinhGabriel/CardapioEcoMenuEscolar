@@ -1,0 +1,39 @@
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre</title>
+
+    <style>
+       
+    .body {
+    +background: url('/static/imgs/fd_sobre.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+
+        .box {
+             height: 100px;
+             width: 200px;
+             position: relative;
+             background-color: red;
+            
+            }
+        </style>
+</head>
+<body>
+    <div id="canva" class="canva">
+        <p id="box" style="left: 0px; top: 200px;">O Serviço Social da Indústria SESI é uma entidade de direito privado, nos termos da lei civil, estruturada em base federativa para prestar assistência social aos trabalhadores industriais e de atividades assemelhadas em todo o País.
+            O SESI exerce papel fundamental no desenvolvimento social brasileiro, colaborando efetivamente com a melhoria da qualidade de vida do trabalhador da indústria, seus familiares e comunidade em geral por meio de seus serviços nos campos da educação,saúde, esporte, cultura, nutrição e outros. 
+            É, também, parceiro das empresas, fornecendo apoio ativo na implantação e desenvolvimento de projetos de benefícios sociais para funcionários.</p>
+        
+    </div
+</body>
+</html>
+{% endblock %}

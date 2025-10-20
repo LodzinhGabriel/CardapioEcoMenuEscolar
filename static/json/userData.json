@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "email": "usuario@sesisenaisp.org.br",
+            "pass": "usuario"
+        },
+        {
+            "email": "admin@sesisenaisp.org.br",
+            "pass": "admin"
+        }
+    ]
+}
