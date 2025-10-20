@@ -98,3 +98,7 @@ def calendario():
 def sobre():
     return render_template("sobre.html")
 
+@app.route("/aviso")
+def aviso():
+    return render_template("paginaavisos.html")
+

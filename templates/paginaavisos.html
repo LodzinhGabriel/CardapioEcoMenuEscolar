@@ -1,0 +1,133 @@
+{% extends 'layoutadm.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="/static/assets/logo.PNG"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avisos</title>
+
+    
+
+    <style>
+    /* TOPO */
+    .top-bar {
+      background-color: #c80000;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed; /* fixa no topo */
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1100;
+    }
+
+
+
+    /* CONTEÚDO DA PÁGINA */
+    body {
+        margin: 0;
+        padding-top: 70px; /* espaço para navbar */
+        font-family: Arial, sans-serif;
+        background: url('/static/imgs/fundoavisos.png') no-repeat center center;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 90vh;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        width: 700px;
+        margin-top: 90px; /* dá um espaçamento extra abaixo da navbar */
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #000;
+        text-shadow: 1px 1px 2px #888;
+    }
+
+    textarea {
+        width: 100%;
+        height: 230px;
+        padding: 10px;
+        border: 2px solid orange;
+        border-radius: 5px;
+        font-size: 16px;
+        resize: none;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        background-color: #000;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #333;
+    }
+
+
+    </style>
+</head>
+<body>
+
+
+  <!-- CONTEÚDO DA PÁGINA -->
+  <div class="container">
+      <h1>AVISO</h1>
+      <textarea placeholder="Adicionar mensagem..."></textarea>
+      <br>
+      <button>Enviar</button>
+  </div>
+
+  <!-- SCRIPT DO MENU -->
+  <script>
+    const menuIcon = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+
+    menuIcon.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (sideMenu.style.left === '0px') {
+        sideMenu.style.left = '-220px';
+        menuIcon.classList.remove('hidden');
+      } else {
+        sideMenu.style.left = '0px';
+        menuIcon.classList.add('hidden');
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (
+        sideMenu.style.left === '0px' &&
+        !sideMenu.contains(event.target) &&
+        event.target !== menuIcon
+      ) {
+        sideMenu.style.left = '-220px';
+        menuIcon.classList.remove('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+{% endblock %}

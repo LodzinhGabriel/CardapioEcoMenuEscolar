@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../static/css/style.css">
 
     <style>
-
     /* TOPO */
     .top-bar {
       background-color: #c80000;
@@ -59,9 +58,9 @@
     .side-menu {
       position: fixed;
       left: -220px;
-      top: 70px; /* Aqui: menu começa logo abaixo da navbar */
+      top: 70px; /* menu começa abaixo da navbar */
       width: 220px;
-      height: calc(100% - 70px); /* altura total da tela menos a navbar */
+      height: calc(100% - 70px);
       background-color: #b40000;
       color: white;
       transition: left 0.3s ease;
@@ -104,27 +103,74 @@
       font-weight: bold;
     }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 0, 0, 0.7);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-        }
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 0, 0, 0.7);
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    /* PERFIL */
+    .profile {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 32px;
+        color: white;
+        cursor: pointer;
+        z-index: 1200;
+    }
+
+    .profile-menu {
+        display: none;
+        position: absolute;
+        top: 60px; /* abaixo da navbar */
+        right: 20px;
+        background: white;
+        color: black;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        overflow: hidden;
+        z-index: 1200;
+    }
+
+    .profile-menu.active { display: block; }
+
+    .profile-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .profile-menu li {
+        padding: 12px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .profile-menu li:hover {
+        background: red;
+        color: white;
+    }
 
     </style>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
 
-   <!-- MENU LATERAL -->
-  <div id="sideMenu" class="side-menu">
+<!-- MENU LATERAL -->
+<div id="sideMenu" class="side-menu">
     <div>
       <div class="menu-header">Menu ADM</div>
       <div class="menu-divider"></div>
-      <a href="#">Perfil</a>
+      <a href="#">Inicio</a>
       <a href="#">Editar Cardápio</a>
       <a href="#">Editar Curiosidades</a>
       <a href="#">Editar Desperdício</a>
@@ -136,49 +182,80 @@
       <a href="#" class="sobre-link">Sobre</a>
       <div class="menu-divider"></div>
     </div>
-  </div>
+</div>
 
-  <!-- TOPO -->
-  <div class="top-bar">
+<!-- TOPO -->
+<div class="top-bar">
     <div class="menu-icon" id="menuToggle">
-      <div></div>
-      <div></div>
-      <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
+
     <div class="logo">
-      <img src="/static/imgs/logosesiadm.png" alt="Logo SESI" />
+        <img src="/static/imgs/logosesiadm.png" alt="Logo SESI" />
     </div>
-  </div>
+
+    <!-- PERFIL -->
+    <div class="profile" onclick="toggleProfileMenu()">
+        <i class="fas fa-user-circle"></i>
+    </div>
+    <div class="profile-menu" id="profileMenu">
+        <ul>
+            <li onclick="logout()">Sair</li>
+        </ul>
+    </div>
+</div>
 
 <!-- SCRIPT DO MENU -->
-  <script>
-    const menuIcon = document.getElementById('menuToggle');
-    const sideMenu = document.getElementById('sideMenu');
+<script>
+const menuIcon = document.getElementById('menuToggle');
+const sideMenu = document.getElementById('sideMenu');
+const profileMenu = document.getElementById('profileMenu');
 
-    menuIcon.addEventListener('click', (event) => {
-      event.stopPropagation();
-      if (sideMenu.style.left === '0px') {
+menuIcon.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (sideMenu.style.left === '0px') {
         sideMenu.style.left = '-220px';
         menuIcon.classList.remove('hidden');
-      } else {
+    } else {
         sideMenu.style.left = '0px';
         menuIcon.classList.add('hidden');
-      }
-    });
+        profileMenu.classList.remove('active');
+    }
+});
 
-    document.addEventListener('click', (event) => {
-      if (
+document.addEventListener('click', (event) => {
+    if (
         sideMenu.style.left === '0px' &&
         !sideMenu.contains(event.target) &&
         event.target !== menuIcon
-      ) {
+    ) {
         sideMenu.style.left = '-220px';
         menuIcon.classList.remove('hidden');
-      }
-    });
-  </script>
+    }
 
-    {% block content %}
-    {% endblock %}
+    // Fecha menu do perfil se clicar fora
+    if (profileMenu.classList.contains('active') &&
+        !profileMenu.contains(event.target) &&
+        !event.target.closest('.profile')) {
+        profileMenu.classList.remove('active');
+    }
+});
+
+// Menu do perfil
+function toggleProfileMenu() {
+    profileMenu.classList.toggle('active');
+}
+
+function logout() {
+    alert("Você saiu da conta!");
+    // window.location.href = "/login";
+}
+</script>
+
+{% block content %}
+{% endblock %}
+
 </body>
 </html>
