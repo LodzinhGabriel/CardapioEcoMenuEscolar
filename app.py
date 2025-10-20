@@ -22,7 +22,7 @@ class Meta(db.Model):
 class Calendario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.DateTime, nullable=False)
-    anexo = db.Column(db.String(100), nullable=False)
+    anexo = db.Column(db.Binary, nullable=False)
 
 class Desperdicio(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -30,6 +30,48 @@ class Desperdicio(db.Model):
     qtdAlunos = db.Column(db.Integer, nullable=False)
     sobras = db.Column(db.Float, nullable=False)
     comidaFeita = db.Column(db.Float, nullable=False)
+
+class Voto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'))
+    usuario = db.relationship('Usuario', back_populates='voto')
+    votoenquete_id = db.Column(db.Integer, db.ForeignKey('votoenquete.id'))
+    votoenquete = db.relationship('VotoEnquete', back_populates='voto')
+    opcao_id = db.Column(db.Integer, db.ForeignKey('opcao.id'))
+    opcao = db.relationship('Opcao', back_populates='voto')
+    
+
+class VotoEnquete(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    enquete_id = db.Column(db.Integer, db.ForeignKey('enquete.id'))
+    enquete = db.relationship('Enquete', back_populates='votoenquete')
+    voto_id = db.Column(db.Integer, db.ForeignKey('voto.id'))
+    voto = db.relationship('Voto', back_populates='votoenquete')
+
+class Opcao(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(20), nullable=False)
+    opcaoenquete_id = db.Column(db.Integer, db.ForeignKey('opcaoenquete.id'))
+    opcaoenquete = db.relationship('OpcaoEnquete', back_populates='opcao')
+
+class OpcaoEnquete(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    enquete_id = db.Column(db.Integer, db.ForeignKey('enquete.id'))
+    enquete = db.relationship('Enquete', back_populates='opcaoenquete')
+    opcao_id = db.Column(db.Integer, db.ForeignKey('opcao.id'))
+    opcao = db.relationship('Opcao', back_populates='opcaoenquete')
+    
+class Enquete(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(20), nullable=False)
+    data_inicio = db.Column(db.DateTime, nullable=False)
+    data_fim = db.Column(db.DateTime, nullable=False)
+    votoenquete_id = db.Column(db.Integer, db.ForeignKey('votoenquete.id'))
+    votoenquete = db.relationship('Votos', back_populates='enquete')
+    opcaoenquete_id = db.Column(db.Integer, db.ForeignKey('opcaoenquete.id'))
+    opcaoenquete = db.relationship('Votos', back_populates='enquete')
+
+
 
 with app.app_context():
     db.create_all()
