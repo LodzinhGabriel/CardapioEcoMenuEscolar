@@ -239,16 +239,17 @@
             </div>
             
             <div class="login-box">
+                {& if erro &}
                 <div class="login-tabs">
-                    <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Aluno</button>
-                    <button id="btnAdm" onclick="toggleLogin('adm')">Funcionário</button>
+                    <p id="btnAluno" class="active">{{ erro }}</p>
                 </div>
+                {% end if %}
                 <form action="">
                     <label for="email">EMAIL:</label>
                     <input type="email" id="email" placeholder="Digite seu email" required>
-                    <label for="senha">SENHA:</label>
-                    <input type="password" id="senha" placeholder="Digite sua senha" required>
-                    <button class="acessar">Acessar</button>
+                    <label for="password">SENHA:</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                    <button type="submit" class="acessar">Acessar</button>
                 </form>
                 
             </div>
