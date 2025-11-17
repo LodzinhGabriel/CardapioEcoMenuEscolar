@@ -63,7 +63,7 @@
         }
 
         .gradient-container {
-            background-color: rgba(153, 35, 35, 0.75);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1), 60%, rgba(153, 35, 35, 0), 80%, rgba(153, 35, 35, 0));
             width: 100%;
             height: 100%;
         }
@@ -97,7 +97,7 @@
             font-size: 48px;
             margin-bottom: 10px;
             color: #333;
-            font-family: 'Arial Black', sans-serif;
+            font-family: 'Gotham Black';
             text-transform: uppercase;
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -111,12 +111,15 @@
             color: white;
             text-align: justify;
             line-height: 1.5;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Gotham';
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
             cursor: default;
             margin: 0px;
         }
         .login-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: white;
             padding: 30px;
             border-radius: 10px;
@@ -131,7 +134,7 @@
             border-bottom: 2px solid #ccc;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            
+            size: 100%;
         }
         .login-tabs button {
             background: none;
@@ -141,10 +144,9 @@
             cursor: pointer;
             color: #333;
         }
-        .login-tabs button.active {
+        .erro {
             font-weight: bold;
             color: red;
-            border-bottom: 2px solid red;
         }
 
         .container {
@@ -165,15 +167,20 @@
         }
         
         .texto-objetivo h1 {
-            color: white;
+            font-family: 'Gotham Black';
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            -webkit-text-stroke: 2px black;
             font-size: 40px;
             padding-left: 20px;
         }
 
         .texto-objetivo p {
-            
-            color: white;
-            width: 400px;
+            font-family: 'Gotham';
+            color: rgb(255, 255, 255);
+            -webkit-text-stroke: 1px black;
+            font-size: 20px;
+            width: 600px;
            padding-left: 20px;
         }
       
@@ -189,7 +196,7 @@
             left: 15px;
             border-radius: 8px;
         }
-            .label {
+        .label {
             font-weight: bold;
             display: block;
             margin-top: 15px;
@@ -239,12 +246,12 @@
             </div>
             
             <div class="login-box">
-                {& if erro &}
-                <div class="login-tabs">
-                    <p id="btnAluno" class="active">{{ erro }}</p>
-                </div>
-                {% end if %}
-                <form action="">
+                {% if erro %}
+                    <div class="login-tabs">
+                        <p style="size: 200px;" class="erro">{{ erro }}</p>
+                    </div>
+                {% endif %}
+                <form action="" method="post">
                     <label for="email">EMAIL:</label>
                     <input type="email" id="email" placeholder="Digite seu email" required>
                     <label for="password">SENHA:</label>
@@ -266,18 +273,6 @@
             </div>
         </div>
     </div>
-    <script>
-        function toggleLogin(tipo) {
-            document.getElementById('btnAluno').classList.remove('active');
-            document.getElementById('btnAdm').classList.remove('active');
-            document.getElementById('btn' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('active');
-        }
-
-        function grantAcess() {
-            const email = document.getElementById('email')
-            const senha = document.getElementById('senha')
-        }
-    </script>
 </body>
 </html>
 

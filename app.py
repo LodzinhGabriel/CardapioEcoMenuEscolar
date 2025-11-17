@@ -67,9 +67,9 @@ class Voto(db.Model):
     __tablename__ = 'voto'
 
     id = db.Column(db.Integer, primary_key=True)
-    usuario = db.relationship('Usuario', back_populates='voto')
-    votoenquete = db.relationship('VotoEnquete', back_populates='voto')
-    opcao = db.relationship('Opcao', back_populates='voto')
+    id_usuario = db.Column(db.Integer, nullable=False)
+    voto_enquete = db.Column(db.Integer, nullable=False)
+    opcao = db.Column(db.Integer, nullable=False)
 
     def __init__(self, usuario, votoenquete, opcao):
         self.usuario = usuario
@@ -81,8 +81,8 @@ class VotoEnquete(db.Model):
     __tablename__ = 'votoenquete'
 
     id = db.Column(db.Integer, primary_key=True)
-    enquete = db.relationship('Enquete', back_populates='votoenquete')
-    voto = db.relationship('Voto', back_populates='votoenquete')
+    enquete = db.Column(db.Integer, nullable=False)
+    voto = db.Column(db.Integer, nullable=False)
 
     def __init__(self, enquete, voto):
         self.enquete = enquete
@@ -93,7 +93,7 @@ class Opcao(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(20), nullable=False)
-    opcaoenquete = db.relationship('OpcaoEnquete', back_populates='opcao')
+    opcaoenquete = db.Column(db.Integer, nullable=False)
 
     def __init__(self, nome, opcaoenquete):
         self.nome = nome
@@ -103,8 +103,8 @@ class OpcaoEnquete(db.Model):
     __tablename__ = 'opcaoenquete'
 
     id = db.Column(db.Integer, primary_key=True)
-    enquete = db.relationship('Enquete', back_populates='opcaoenquete')
-    opcao = db.relationship('Opcao', back_populates='opcaoenquete')
+    enquete = db.Column(db.Integer, nullable=False)
+    opcao = db.Column(db.Integer, nullable=False)
 
     def __init__(self, enquete, opcao):
         self.enquete = enquete
@@ -118,8 +118,8 @@ class Enquete(db.Model):
     titulo = db.Column(db.String(20), nullable=False)
     data_inicio = db.Column(db.DateTime, nullable=False)
     data_fim = db.Column(db.DateTime, nullable=False)
-    votoenquete = db.relationship('Votos', back_populates='enquete')
-    opcaoenquete = db.relationship('Votos', back_populates='enquete')
+    votoenquete = db.Column(db.Integer, nullable=False)
+    opcaoenquete = db.Column(db.Integer, nullable=False)
 
     def __init__(self, titulo, data_inicio, data_fim, votoenquete, opcaoenquete):
         self.titulo = titulo
@@ -158,10 +158,10 @@ def pagina_inicial_post():
     usuario = Usuario.query.filter_by(email=email).first()
 
     if not usuario:
-        return render_template("login.html", erro="Usuário não encontrado.")
+        return render_template("paginainicial.html", erro="Usuário não encontrado.")
     
     if not bcrypt.check_password_hash(usuario.senha, senha):
-        return render_template("login.html", erro="Senha incorreta.")
+        return render_template("paginainicial.html", erro="Senha incorreta.")
 
     session["usuario_id"] = usuario.id
 
