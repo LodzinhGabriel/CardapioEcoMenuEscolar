@@ -1,4 +1,4 @@
-/* layout.html */
+/* ------------------------------------------------------------------------ layout.html */
 
 @font-face {
     font-family: "GothamXLight";
@@ -118,7 +118,7 @@ body {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* calendario.html */
+/* ------------------------------------------------------------------------ calendario.html */
 
 body {
     background: url('/static/imgs/fundo_calen.png') no-repeat center center fixed;
@@ -135,7 +135,7 @@ body {
     position: relative;
 }
 
-/* cardapioadm.html */
+/* ------------------------------------------------------------------------ cardapioadm.html */
 
 * {
     box-sizing: border-box;
@@ -273,7 +273,7 @@ body {
     }
 }
 
-/* enquete.html */
+/* ------------------------------------------------------------------------ enquete.html */
 
 body {
     background: url('/static/imgs/fundo_enq.jpg') no-repeat center center fixed;
@@ -283,7 +283,7 @@ body {
     align-items: center;
 }
 
-/* homealuno.html */
+/* ------------------------------------------------------------------------ homealuno.html */
 
 * {
     margin: 0;
@@ -428,7 +428,7 @@ body {
     background: darkred;
 }
 
-/* homenutri.html */
+/* ------------------------------------------------------------------------ homenutri.html */
 
 .box {
     height: 150px;
@@ -436,7 +436,7 @@ body {
     position: relative;
 }
 
-/* paginainicial.html */
+/* ------------------------------------------------------------------------ paginainicial.html */
 
 .section {
     width: 100%;
@@ -655,7 +655,7 @@ button.acessar:hover {
     background: darkred;
 }
 
-/* resultado_calculo.html */
+/* ------------------------------------------------------------------------ resultado_calculo.html */
 
 body {
     background: url('/static/imgs/fundo_results.jpg') no-repeat center center fixed;
@@ -672,7 +672,7 @@ body {
     position: relative;
 }
 
-/* sobre.html */
+/* ------------------------------------------------------------------------ sobre.html */
 
 .body {
     background: url('/static/imgs/fd_sobre.png') no-repeat center center fixed;
