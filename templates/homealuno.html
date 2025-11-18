@@ -6,16 +6,6 @@
     <input type="text" placeholder="Pesquisar...">
     <i class="fas fa-search"></i>
 </div>
-<div class="sidebar">
-    <h2>Menu</h2>
-    <ul>
-        <li>Sair</li>
-        <li>Cardápio</li>
-        <li>Curiosidades</li>
-        <li>Desperdício</li>
-        <li>Sobre</li>
-    </ul>
-</div>
 <div class="container">
     <div class="header">OLA, SEJA BEM VINDO!</div>
     <div class="nav left"><i class="fas fa-arrow-left"></i></div>
@@ -24,18 +14,5 @@
     </div>
     <div class="nav right"><i class="fas fa-arrow-right"></i></div>
 </div>
-<script>
-    function toggleMenu() {
-        const sidebar = document.querySelector('.sidebar');
-        sidebar.classList.toggle('active');
-    }
-    
-    document.addEventListener("click", function(event) {
-        const sidebar = document.querySelector('.sidebar');
-        const menuButton = document.querySelector('.menu');
-        if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
-            sidebar.classList.remove('active');
-        }
-    });
-</script>
+
 {% endblock %}
