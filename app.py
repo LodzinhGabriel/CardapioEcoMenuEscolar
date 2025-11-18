@@ -139,14 +139,23 @@ def pagina_incial():
     aluno = Usuario.query.filter_by(email='aluno@portalsesisp.org.br').first()
 
     if not funcionario:
-        funcionario = Usuario(nome='funcionario', tipo='funcionario', email='funcionario@portalsesisp.org.br', password='funcionario')
+        funcionario = Usuario(nome='funcionario', tipo='funcionario', email='funcionario@portalsesisp.org.br', senha='funcionario')
         db.session.add(funcionario)
         db.session.commit()
         
     if not aluno:
-        aluno = Usuario(nome='aluno', tipo='aluno', email='aluno@portalsesisp.org.br', password='aluno')
+        aluno = Usuario(nome='aluno', tipo='aluno', email='aluno@portalsesisp.org.br', senha='aluno')
         db.session.add(aluno)
         db.session.commit()
+
+    if session['usuario_id']:
+        usuario = Usuario.query.get(session['usuario_id'])
+
+        if usuario:
+            if usuario.tipo == "aluno":
+                return redirect(url_for("aluno"))
+            if usuario.tipo == "funcionario":
+                return redirect(url_for("nutri"))
 
     if request.method == "POST":
         email = request.form.get("email")
@@ -159,7 +168,9 @@ def pagina_incial():
         if not usuario:
             return render_template("paginainicial.html", erro="Usuário não encontrado.")
         
-        if not bcrypt.check_password_hash(usuario.senha, senha):
+        senha_correta = bcrypt.generate_password_hash(usuario.senha).decode('utf-8')
+        
+        if not bcrypt.check_password_hash(senha_correta, senha):
             return render_template("paginainicial.html", erro="Senha incorreta.")
 
         session["usuario_id"] = usuario.id
