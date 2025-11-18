@@ -120,6 +120,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             background: white;
             padding: 30px;
             border-radius: 10px;
@@ -251,11 +252,11 @@
                         <p style="size: 200px;" class="erro">{{ erro }}</p>
                     </div>
                 {% endif %}
-                <form action="" method="post">
+                <form action="/" method="POST">
                     <label for="email">EMAIL:</label>
-                    <input type="email" id="email" placeholder="Digite seu email" required>
+                    <input type="email" name="email" id="email" placeholder="Digite seu email" required>
                     <label for="password">SENHA:</label>
-                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                    <input type="password" name="senha" id="password" placeholder="Digite sua senha" required>
                     <button type="submit" class="acessar">Acessar</button>
                 </form>
                 

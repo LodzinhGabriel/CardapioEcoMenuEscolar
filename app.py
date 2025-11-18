@@ -16,13 +16,13 @@ class Usuario(db.Model):
     nome = db.Column(db.String(50), nullable=False)
     tipo = db.Column(db.String(10), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    senha = db.Column(db.String(200), nullable=False)
 
-    def __init__(self, nome, tipo, email, password):
+    def __init__(self, nome, tipo, email, senha):
         self.nome = nome
         self.tipo = tipo
         self.email = email
-        self.password = password
+        self.senha = senha
 
 
 class Meta(db.Model):
@@ -133,8 +133,8 @@ class Enquete(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route("/", methods=['GET'])
-def pagina_incial_get():
+@app.route("/", methods=['GET', 'POST'])
+def pagina_incial():
     funcionario = Usuario.query.filter_by(email='funcionario@portalsesisp.org.br').first()
     aluno = Usuario.query.filter_by(email='aluno@portalsesisp.org.br').first()
 
@@ -148,27 +148,29 @@ def pagina_incial_get():
         db.session.add(aluno)
         db.session.commit()
 
+    if request.method == "POST":
+        email = request.form.get("email")
+        senha = request.form.get("senha")
+
+        print(email, senha)
+
+        usuario = Usuario.query.filter_by(email=email).first()
+
+        if not usuario:
+            return render_template("paginainicial.html", erro="Usuário não encontrado.")
+        
+        if not bcrypt.check_password_hash(usuario.senha, senha):
+            return render_template("paginainicial.html", erro="Senha incorreta.")
+
+        session["usuario_id"] = usuario.id
+
+        if usuario.tipo == "aluno":
+            return redirect(url_for("aluno"))
+        if usuario.tipo == "funcionario":
+            return redirect(url_for("nutri"))
+
+
     return render_template("paginainicial.html")
-
-@app.route("/", methods=['POST'])
-def pagina_inicial_post():
-    email = request.form.get("email")
-    senha = request.form.get("senha")
-
-    usuario = Usuario.query.filter_by(email=email).first()
-
-    if not usuario:
-        return render_template("paginainicial.html", erro="Usuário não encontrado.")
-    
-    if not bcrypt.check_password_hash(usuario.senha, senha):
-        return render_template("paginainicial.html", erro="Senha incorreta.")
-
-    session["usuario_id"] = usuario.id
-
-    if usuario.tipo == "aluno":
-        return redirect(url_for("aluno"))
-    if usuario.tipo == "funcionario":
-        return redirect(url_for("nutri"))
 
 @app.route("/aluno")
 def aluno():
