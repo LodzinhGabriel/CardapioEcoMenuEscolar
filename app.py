@@ -148,7 +148,7 @@ def pagina_incial():
         db.session.add(aluno)
         db.session.commit()
 
-    if session['usuario_id']:
+    if session.get('usuario_id'):
         usuario = Usuario.query.get(session['usuario_id'])
 
         if usuario:
