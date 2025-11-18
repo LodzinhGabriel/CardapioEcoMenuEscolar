@@ -1,39 +1,39 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div id="home" class="section">
-    <div class="up-gradient-container"></div>
-    <div class="container1">
-        <div class="info">
+<div id="home" class="paginainicial section">
+    <div class="paginainicial up-gradient-container"></div>
+    <div class="paginainicial container1">
+        <div class="paginainicial info">
             <h2>Sesi - 185</h2>
             <p>Plataforma de apoio para a visualização do cardápio escolar SESI Barretos</p>
         </div>
 
         <div>
-            <div class="detalhe-bola" id="vermelha"></div>
-            <div class="detalhe-bola" id="branca"></div>
-            <div class="detalhe-bola" id="vermelha-escura"></div>    
+            <div class="paginainicial detalhe-bola" id="vermelha"></div>
+            <div class="paginainicial detalhe-bola" id="branca"></div>
+            <div class="paginainicial detalhe-bola" id="vermelha-escura"></div>    
         </div>
         
-        <div class="login-box">
+        <div class="paginainicial login-box">
             {% if erro %}
-                <div class="login-tabs">
-                    <p style="size: 200px;" class="erro">{{ erro }}</p>
+                <div class="paginainicial login-tabs">
+                    <p style="size: 200px;" class="paginainicial erro">{{ erro }}</p>
                 </div>
             {% endif %}
-            <form action="/" method="POST">
+            <form action="/" method="POST" class="paginainicial">
                 <label for="email">EMAIL:</label>
-                <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+                <input type="email" name="email" id="email" class="paginainicial" placeholder="Digite seu email" required>
                 <label for="password">SENHA:</label>
-                <input type="password" name="senha" id="password" placeholder="Digite sua senha" required>
-                <button type="submit" class="acessar">Acessar</button>
+                <input type="password" name="senha" id="password" class="paginainicial" placeholder="Digite sua senha" required>
+                <button type="submit" class="paginainicial acessar">Acessar</button>
             </form>
         </div>
     </div>
 </div>
 <div style="background-color: rgb(153, 35, 35); width: 100%; height: 150px;"></div>
-<div id="objetivo" class="section">
-    <div class="gradient-container">
-        <div class="texto-objetivo">
+<div id="objetivo" class="paginainicial section">
+    <div class="paginainicial gradient-container">
+        <div class="paginainicial texto-objetivo">
             <h1>UM CARDÁPIO PARA TODOS</h1>
             <p>Fique atualizado sobre quais comidas deliciosas estarão no cardapio dos dias letivos da rede SESI-SP!</p>
             <p>Uma interação mais próxima entre a nutrição e os alunos da rede contribuindo para uma melhor colaboração e organização!</p>

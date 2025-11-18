@@ -10,22 +10,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <div class="header">
-        {% if parte %}
-            {% if parte == 'aluno' %}
+    <div class="layout header">
+        {% if usuario %}
+            {% if usuario.tipo == 'aluno' %}
 
-            {% elif parte == 'adm' %}
+            {% elif usuario.tipo == 'funcionario' %}
 
             {% else %}
                 <p>SESI-SP</p>
             {% endif %}
+        {% else %}
+            <p>SESI-SP</p>
         {% endif %}
     </div>
 
-    <div class="sidebar">
+    <div class="layout sidebar">
         <h2>Menu</h2>
-        {% if parte %}
-            {% if parte == 'aluno' %}
+        {% if usuario %}
+            {% if usuario == 'aluno' %}
                 <ul>
                     <li>Sair</li>
                     <li>Cardápio</li>
@@ -33,16 +35,16 @@
                     <li>Desperdício</li>
                     <li>Sobre</li>
                 </ul>
-            {% elif parte == 'adm' %}
+            {% elif usuario == 'funcionario' %}
 
             {% endif %}
         {% endif %}
     </div>
     {% block content %}
     {% endblock %}
-    <div class="footer">
+    <div class="layout footer">
         <h1>SESI-SP</h1>
-        <div class="separator"></div>
+        <div class="layout separator"></div>
         <h1>2025</h1>
     </div>
 </body>
