@@ -185,7 +185,7 @@ def pagina_incial():
 
 @app.route("/aluno")
 def aluno():
-    if not session["usuario_id"]:
+    if not session.get('usuario_id'):
         return redirect(url_for(""))
     
     usuario = Usuario.query.get(session["usuario_id"])
