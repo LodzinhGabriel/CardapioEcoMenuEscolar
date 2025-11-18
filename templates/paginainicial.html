@@ -16,14 +16,14 @@
         
         <div class="paginainicial login-box">
             {% if erro %}
-                <div class="paginainicial login-tabs">
-                    <p style="size: 200px;" class="paginainicial erro">{{ erro }}</p>
+                <div class="paginainicial alert">
+                    <p class="paginainicial erro">{{ erro }}</p>
                 </div>
             {% endif %}
-            <form action="/" method="POST" class="paginainicial">
-                <label for="email">EMAIL:</label>
+            <form action="/" method="POST">
+                <label for="email" class="paginainicial">E-mail:</label>
                 <input type="email" name="email" id="email" class="paginainicial" placeholder="Digite seu email" required>
-                <label for="password">SENHA:</label>
+                <label for="password" class="paginainicial">Senha:</label>
                 <input type="password" name="senha" id="password" class="paginainicial" placeholder="Digite sua senha" required>
                 <button type="submit" class="paginainicial acessar">Acessar</button>
             </form>

@@ -10,42 +10,61 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <div class="layout header">
-        {% if usuario %}
-            {% if usuario.tipo == 'aluno' %}
-
-            {% elif usuario.tipo == 'funcionario' %}
-
-            {% else %}
-                <p>SESI-SP</p>
-            {% endif %}
+    {% if usuario %}
+        {% if usuario.tipo == 'aluno' %}
+            <div class="layout header" style="justify-content: space-between;">
+                <div class="homealuno menu" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+                <img src="/static/imgs/sesilogo.jpg" height="100%">
+                <div class="homealuno search-bar">
+                    <input type="text" placeholder="Pesquisar...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="homealuno profile"><i class="fas fa-user-circle"></i></div>
+            </div>    
+        {% elif usuario.tipo == 'funcionario' %}
+            <div class="layout header" style="justify-content: space-between;">
+                <img src="/static/imgs/sesilogo.jpg" height="100%">
+            </div>
         {% else %}
-            <p>SESI-SP</p>
+            <div class="layout header">
+                <img src="/static/imgs/sesilogo.jpg" height="100%">
+                <p>Cardápio Escolar</p>
+            </div>
         {% endif %}
-    </div>
+    {% else %}
+        <div class="layout header">
+            <img src="/static/imgs/sesilogo.jpg" height="100%">
+            <p>Cardápio Escolar</p>
+        </div>
+    {% endif %}
 
+    {% if usuario %}
     <div class="layout sidebar">
         <h2>Menu</h2>
-        {% if usuario %}
-            {% if usuario == 'aluno' %}
-                <ul>
-                    <li>Sair</li>
-                    <li>Cardápio</li>
-                    <li>Curiosidades</li>
-                    <li>Desperdício</li>
-                    <li>Sobre</li>
-                </ul>
-            {% elif usuario == 'funcionario' %}
+        {% if usuario.tipo == 'aluno' %}
+            <ul>
+                <li>Sair</li>
+                <li>Cardápio</li>
+                <li>Curiosidades</li>
+                <li>Desperdício</li>
+                <li>Sobre</li>
+            </ul>
+        {% elif usuario.tipo == 'funcionario' %}
 
-            {% endif %}
         {% endif %}
     </div>
+    {% endif %}
     {% block content %}
     {% endblock %}
     <div class="layout footer">
-        <h1>SESI-SP</h1>
-        <div class="layout separator"></div>
-        <h1>2025</h1>
+        <img src="/static/imgs/sesilogo.jpg" width="200px">
+        <div class="layout adress">
+            <h1>Centro Educacional 185</h1>
+            <p>Avenida das Comitivas, Doutor Roberto Cardoso Alves, 800 - Los Angeles</p>
+            <p>14787-400</p>
+            <p>(17) 3321-0450</p>
+        </div>
+        
     </div>
 </body>
 <script>

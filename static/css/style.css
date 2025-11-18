@@ -2,62 +2,62 @@
 
 @font-face {
     font-family: "GothamXLight";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-XLight.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-XLight.otf");
 }
 
 @font-face {
     font-family: "GothamXLightItalic";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-XLightItalic.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-XLightItalic.otf");
 }
 
 @font-face {
     font-family: "GothamLight";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-Light.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-Light.otf");
 }
 
 @font-face {
     font-family: "GothamLightItalic";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-LightItalic.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-LightItalic.otf");
 }
 
 @font-face {
     font-family: "GothamBook";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-Book.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-Book.otf");
 }
 
 @font-face {
     font-family: "GothamBookItalic";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-BookItaliс.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-BookItaliс.otf");
 }
 
 @font-face {
     font-family: "Gotham";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-Medium.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-Medium.otf");
 }
 
 @font-face {
     font-family: "GothamItalic";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-MediumItalic.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-MediumItalic.otf");
 }
 
 @font-face {
     font-family: "GothamBold";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-Bold.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-Bold.otf");
 }
 
 @font-face {
     font-family: "GothamBoldItalic";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-BoldItalic.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-BoldItalic.otf");
 }
 
 @font-face {
     font-family: "GothamBlack";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-Black.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-Black.otf");
 }
 
 @font-face {
     font-family: "GothamBlackItalic";
-    src: url("../static/fonts/GothamScreenSmart/GothamSSm-BlackItalic.otf");
+    src: url("../fonts/GothamScreenSmart/GothamSSm-BlackItalic.otf");
 }
 
 body {
@@ -68,13 +68,12 @@ body {
 
 .layout.header {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 5px;
     background-color: red;
     color: white;
-    height: 30px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     width: 100%;
     height: 50px;
@@ -82,10 +81,7 @@ body {
     z-index: 1000;
 }
 .layout.header p {
-    font-family: 'GothamBlack';
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: bold;
+    font-family: 'GothamLight';
     font-size: 30px;
 }
 
@@ -100,11 +96,26 @@ body {
 .layout.footer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     background-color: red;
     color: white;
     width: 100%;
     height: 120px;
+}
+
+.layout.adress {
+    width: 300px;
+}
+
+.layout.adress h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.layout.adress p {
+    margin: 0;
+    font-size: 10px;
+    font-family: 'GothamLight';
 }
 
 .layout::-webkit-scrollbar {
@@ -116,6 +127,37 @@ body {
 }
 .layout::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.1);
+}
+
+.layout.sidebar {
+    position: fixed;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: red;
+    color: white;
+    transition: left 0.3s;
+}
+.layout.sidebar.active {
+    left: 0;
+}
+.layout.sidebar h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.layout.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.layout.sidebar ul li {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+}
+.layout.sidebar ul li:hover {
+    background: darkred;
 }
 
 /* ------------------------------------------------------------------------ calendario.html */
@@ -285,30 +327,25 @@ body.enquete {
 
 /* ------------------------------------------------------------------------ homealuno.html */
 
-*.homealuno {
+.body.homealuno {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-body.homealuno {
-    background: url('/static/imgs/fundo.PNG') no-repeat center center/cover;
+    background-image: url('/static/imgs/fundo.PNG') no-repeat center center/cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    
     position: relative;
-    overflow: hidden;
 }
 .homealuno.container {
     text-align: center;
-    width: 100%;
-    max-width: 900px;
-    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 100px; 
+    height: 100vh;
 }
 .homealuno.header {
     font-size: 36px;
@@ -318,8 +355,6 @@ body.homealuno {
     background: rgb(0, 0, 0);
     padding: 15px;
     border-radius: 10px;
-    position: absolute;
-    top: -30%;
     width: 80%;
     text-align: center;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -339,10 +374,16 @@ body.homealuno {
     position: relative;
     z-index: 1;
 }
+
+.homealuno.carrousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .homealuno.nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 32px;
     color: red;
     cursor: pointer;
@@ -357,26 +398,16 @@ body.homealuno {
 }
 
 .homealuno.menu {
-    position: absolute;
-    top: 20px;
-    left: 20px;
     font-size: 32px;
-    color: red;
+    color: white;
     cursor: pointer;
 }
 .homealuno.profile {
-    position: absolute;
-    top: 20px;
-    right: 20px;
     font-size: 32px;
-    color: red;
+    color: white;
     cursor: pointer;
 }
 .homealuno.search-bar {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
     width: 800px;
     height: 40px;
     background: white;
@@ -395,38 +426,7 @@ body.homealuno {
     color: red;
     font-size: 20px;
 }
-.homealuno.sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background: red;
-    color: white;
-    transition: left 0.3s;
-    padding-top: 20px;
-}
-.homealuno.sidebar.active {
-    left: 0;
-}
-.homealuno.sidebar h2 {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.homealuno.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-.homealuno.sidebar ul li {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid white;
-    cursor: pointer;
-}
-.homealuno.sidebar ul li:hover {
-    background: darkred;
-}
+
 
 /* ------------------------------------------------------------------------ homenutri.html */
 
@@ -558,23 +558,17 @@ body.homealuno {
     height: 300px;
     z-index: 1;
 }
-.paginainicial.login-tabs {
+.paginainicial.alert {
     display: flex;
     justify-content: space-around;
     border-bottom: 2px solid #ccc;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 5px;
     size: 100%;
 }
-.paginainicial.login-tabs button {
-    background: none;
-    border: none;
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    color: #333;
-}
+
 .paginainicial.erro {
+    margin: 0;
     font-weight: bold;
     color: red;
 }
@@ -626,13 +620,14 @@ body.homealuno {
     left: 15px;
     border-radius: 8px;
 }
-.paginainicial.label {
-    font-weight: bold;
+label.paginainicial {
+    font-family: 'GothamLight';
     display: block;
     margin-top: 15px;
     color: #333;
 }
 input.paginainicial {
+    font-family: 'Gotham';
     width: calc(100% - 20px);
     padding: 12px;
     margin: 5px 0;
@@ -640,7 +635,9 @@ input.paginainicial {
     border-radius: 5px;
     font-size: 16px;
 }
+
 button.paginainicial.acessar {
+    font-family: 'GothamBlack';
     width: 100%;
     padding: 12px;
     background: red;
