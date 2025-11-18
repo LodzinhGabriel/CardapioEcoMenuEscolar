@@ -1,36 +1,8 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário</title>
-    <style>
-    body {
-        background: url('/static/imgs/fundo_calen.png') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    }
-   
-        
-    .box {
-         height: 500px;
-         width: 800px;
-         position: relative;
-        }
-    </style>
-</head>
-<body>
-    <h2 style= "text-align: center;" >CALENDÁRIO</h2>
-    
-    <div id="canva" class="canva">
-        <img src="/static/imgs/calendario.png" id="box" class="box" style="left: 0px; top: 50px;"></div>
-    </div>
-    
-</body>
-</html>
+<h2 style= "text-align: center;" >CALENDÁRIO</h2>
+
+<div id="canva" class="canva">
+    <img src="/static/imgs/calendario.png" id="box" class="box" style="left: 0px; top: 50px;"></div>
+</div>
 {% endblock %}

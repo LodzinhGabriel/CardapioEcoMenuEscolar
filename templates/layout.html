@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -5,72 +6,38 @@
     <link rel="shortcut icon" type="image/png" href="/static/assets/logo.PNG"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio EcoMenu Escolar</title>
-
     <link rel="stylesheet" href="../static/css/style.css">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            padding: 0;
-            background-color: red;
-            color: white;
-            height: 30px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            height: 50px;
-            position: fixed;
-            z-index: 1000;
-        }
-        .header p {
-            font-family: 'Arial Black', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            font-size: 30px;
-        }
-
-        .separator {
-            background-color: white;
-            width: 5px;
-            height: 75%;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-
-        .footer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: red;
-            color: white;
-            width: 100%;
-            height: 120px;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 0, 0, 0.7);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <div class="header"><p>SESI-SP</p></div>
+    <div class="header">
+        {% if parte %}
+            {% if parte == 'aluno' %}
+
+            {% elif parte == 'adm' %}
+
+            {% else %}
+                <p>SESI-SP</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="sidebar">
+        <h2>Menu</h2>
+        {% if parte %}
+            {% if parte == 'aluno' %}
+                <ul>
+                    <li>Sair</li>
+                    <li>Cardápio</li>
+                    <li>Curiosidades</li>
+                    <li>Desperdício</li>
+                    <li>Sobre</li>
+                </ul>
+            {% elif parte == 'adm' %}
+
+            {% endif %}
+        {% endif %}
+    </div>
     {% block content %}
     {% endblock %}
     <div class="footer">
@@ -79,4 +46,18 @@
         <h1>2025</h1>
     </div>
 </body>
+<script>
+    function toggleMenu() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('active');
+    }
+    
+    document.addEventListener("click", function(event) {
+        const sidebar = document.querySelector('.sidebar');
+        const menuButton = document.querySelector('.menu');
+        if (!sidebar.contains(event.target) && !menuButton.contains(event.target)) {
+            sidebar.classList.remove('active');
+        }
+    });
+</script>
 </html>

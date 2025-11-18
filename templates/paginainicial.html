@@ -1,284 +1,44 @@
 {% extends 'layout.html' %}
-
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesi-SP</title>
-    <style> 
+<div id="home" class="section">
+    <div class="up-gradient-container"></div>
+    <div class="container1">
+        <div class="info">
+            <h2>Sesi - 185</h2>
+            <p>Plataforma de apoio para a visualização do cardápio escolar SESI Barretos</p>
+        </div>
 
-        .section {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-        }
-        #home {
-            background: url('/static/imgs/fundo.PNG') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .detalhe-bola {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            border-radius: 100%;
-            margin: 0;
-        }
-
-        #vermelha {
-            background-color: red;
-            position: absolute;
-            left: 55%;
-            top: 35%;
-        }
-
-        #vermelha-escura{
-            background-color: maroon;
-            position: absolute;
-            left: 85%;
-            top: 8%;
-        }
-
-        #branca {
-            background-color: white;
-            position: absolute;
-            left: 73%;
-            top: 60%;
-        }
-
-        #objetivo {
-            background: url('/static/imgs/fundo2.PNG') no-repeat center center/cover;
-            position: relative;
-            height: 650px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .gradient-container {
-            background-color: rgba(153, 35, 35, 0.75);
-            width: 100%;
-            height: 100%;
-        }
-
-        .up-gradient-container {
-            position: absolute;
-            background: linear-gradient(0turn, rgb(153, 35, 35), 50%, rgba(153, 35, 35, 0));
-            width: 100%;
-            height: 100%;
-        }
-
-        .container1 {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            position: relative;
-            align-items: center;
-            width: 80%;
-            max-width: 1200px;
-        }
-        .info {
-            max-width: 50%;
-            text-align: left;
-            padding: 20px;
-            background: transparent;
-            padding: 30px;
-            border-radius: 15px;
-            padding: 0;
-        }
-        .info h2 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            color: #333;
-            font-family: 'Arial Black', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            color: white;
-            cursor:default;
-            margin: 0px;
-            cursor: default;
-        }
-        .info p {
-            font-size: 18px;
-            color: white;
-            text-align: justify;
-            line-height: 1.5;
-            font-family: 'Arial', sans-serif;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-            cursor: default;
-            margin: 0px;
-        }
-        .login-box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-            width: 400px;
-            height: 300px;
-            z-index: 1;
-        }
-        .login-tabs {
-            display: flex;
-            justify-content: space-around;
-            border-bottom: 2px solid #ccc;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            
-        }
-        .login-tabs button {
-            background: none;
-            border: none;
-            padding: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            color: #333;
-        }
-        .login-tabs button.active {
-            font-weight: bold;
-            color: red;
-            border-bottom: 2px solid red;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 90px;
-            border-radius: 12px;
-            max-width: 480px;
-            text-align: left;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .texto-objetivo {
-            
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
+        <div>
+            <div class="detalhe-bola" id="vermelha"></div>
+            <div class="detalhe-bola" id="branca"></div>
+            <div class="detalhe-bola" id="vermelha-escura"></div>    
+        </div>
         
-        .texto-objetivo h1 {
-            color: white;
-            font-size: 40px;
-            padding-left: 20px;
-        }
-
-        .texto-objetivo p {
-            
-            color: white;
-            width: 400px;
-           padding-left: 20px;
-        }
-      
-        .titulo {
-            background: black;
-            color: white;
-            padding: 20px 25px;
-            font-size: 1.7em;
-            font-weight: bold;
-            display: inline-block;
-            position: absolute;
-            top: -25px;
-            left: 15px;
-            border-radius: 8px;
-        }
-            .label {
-            font-weight: bold;
-            display: block;
-            margin-top: 15px;
-            color: #333;
-        }
-        input {
-            width: calc(100% - 20px);
-            padding: 12px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button.acessar {
-            width: 100%;
-            padding: 12px;
-            background: red;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 15px;
-        }
-        button.acessar:hover {
-            background: darkred;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="home" class="section">
-        <div class="up-gradient-container">
-                
-            </div>
-        <div class="container1">
-            
-            <div class="info">
-                <h2>Sesi - 185</h2>
-                <p>Plataforma de apoio para a visualização do cardápio escolar Sesi Barretos</p>
-            </div>
-
-            <div>
-                <div class="detalhe-bola" id="vermelha"></div>
-                <div class="detalhe-bola" id="branca"></div>
-                <div class="detalhe-bola" id="vermelha-escura"></div>    
-            </div>
-            
-            <div class="login-box">
+        <div class="login-box">
+            {% if erro %}
                 <div class="login-tabs">
-                    <button id="btnAluno" class="active" onclick="toggleLogin('aluno')">Aluno</button>
-                    <button id="btnAdm" onclick="toggleLogin('adm')">Funcionário</button>
+                    <p style="size: 200px;" class="erro">{{ erro }}</p>
                 </div>
-                <form action="">
-                    <label for="email">EMAIL:</label>
-                    <input type="email" id="email" placeholder="Digite seu email" required>
-                    <label for="senha">SENHA:</label>
-                    <input type="password" id="senha" placeholder="Digite sua senha" required>
-                    <button class="acessar">Acessar</button>
-                </form>
-                
-            </div>
+            {% endif %}
+            <form action="/" method="POST">
+                <label for="email">EMAIL:</label>
+                <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+                <label for="password">SENHA:</label>
+                <input type="password" name="senha" id="password" placeholder="Digite sua senha" required>
+                <button type="submit" class="acessar">Acessar</button>
+            </form>
         </div>
     </div>
-    <div style="background-color: rgb(153, 35, 35); width: 100%; height: 150px;"></div>
-    <div id="objetivo" class="section">
-        <div class="gradient-container">
-            <div class="texto-objetivo">
-                <h1>UM CARDÁPIO PARA TODOS</h1>
-                <p>Fique atualizado sobre quais comidas deliciosas estarão no cardapio dos dias letivos da rede SESI-SP!</p>
-                <p>Uma interação mais próxima entre a nutrição e os alunos da rede contribuindo para uma melhor colaboração e organização!</p>
-                <p>Desenvolvemos um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</p>
-            </div>
+</div>
+<div style="background-color: rgb(153, 35, 35); width: 100%; height: 150px;"></div>
+<div id="objetivo" class="section">
+    <div class="gradient-container">
+        <div class="texto-objetivo">
+            <h1>UM CARDÁPIO PARA TODOS</h1>
+            <p>Fique atualizado sobre quais comidas deliciosas estarão no cardapio dos dias letivos da rede SESI-SP!</p>
+            <p>Uma interação mais próxima entre a nutrição e os alunos da rede contribuindo para uma melhor colaboração e organização!</p>
+            <p>Desenvolvemos um site interativo que centralize o cardápio escolar e promova educação alimentar, sustentabilidade e engajamento da comunidade escolar, incentivando práticas conscientes e saudáveis.</p>
         </div>
     </div>
-    <script>
-        function toggleLogin(tipo) {
-            document.getElementById('btnAluno').classList.remove('active');
-            document.getElementById('btnAdm').classList.remove('active');
-            document.getElementById('btn' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('active');
-        }
-
-        function grantAcess() {
-            const email = document.getElementById('email')
-            const senha = document.getElementById('senha')
-        }
-    </script>
-</body>
-</html>
-
-
+</div>
 {% endblock %}
