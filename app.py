@@ -134,7 +134,7 @@ with app.app_context():
     db.create_all()
 
 @app.route("/", methods=['GET', 'POST'])
-def pagina_incial():
+def pagina_inicial():
     funcionario = Usuario.query.filter_by(email='funcionario@portalsesisp.org.br').first()
     aluno = Usuario.query.filter_by(email='aluno@portalsesisp.org.br').first()
 
@@ -186,13 +186,13 @@ def pagina_incial():
 @app.route("/aluno")
 def aluno():
     if not session.get('usuario_id'):
-        return redirect(url_for(""))
+        return redirect(url_for("pagina_inicial"))
     
     usuario = Usuario.query.get(session["usuario_id"])
 
     if not usuario.tipo == "aluno":
         session["usuario_id"] == None
-        return redirect(url_for(""))
+        return redirect(url_for("pagina_inicial"))
 
     return render_template("homealuno.html", usuario=usuario)
 
@@ -203,13 +203,13 @@ def cadastrarse():
 @app.route("/nutri")
 def nutri():
     if not session["usuario_id"]:
-        return redirect(url_for(""))
+        return redirect(url_for("pagina_inicial"))
     
     usuario = Usuario.query.get(session["usuario_id"])
 
     if not usuario.tipo == "funcionario":
         session["usuario_id"] == None
-        return redirect(url_for(""))
+        return redirect(url_for("pagina_inicial"))
 
     return render_template("homenutri.html", usuario=usuario)
 
