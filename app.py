@@ -183,6 +183,13 @@ def pagina_inicial():
 
     return render_template("paginainicial.html")
 
+@app.route("/logout", methods=['GET', 'POST'])
+def logout():
+    session.clear()
+
+    return redirect(url_for("pagina_inicial"))
+
+
 @app.route("/aluno")
 def aluno():
     if not session.get('usuario_id'):
@@ -227,5 +234,10 @@ def calendario():
 
 @app.route("/sobre")
 def sobre():
-    return render_template("sobre.html")
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+
+    return render_template("sobre.html", usuario=usuario)
 
