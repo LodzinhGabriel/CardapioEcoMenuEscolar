@@ -203,10 +203,6 @@ def aluno():
 
     return render_template("homealuno.html", usuario=usuario)
 
-@app.route("/cadastrarse")
-def cadastrarse():
-    return render_template("cadastrarse.html")
-
 @app.route("/nutri")
 def nutri():
     if not session["usuario_id"]:
@@ -222,15 +218,30 @@ def nutri():
 
 @app.route("/cardapio")
 def cardapio():
-    return render_template("")
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+    
+    return render_template("cardapio.html", usuario=usuario)
 
 @app.route("/cardapioadm")
 def cardapioadm():
-    return render_template("cardapioadm.html")
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+    
+    return render_template("cardapioadm.html", usuario=usuario)
 
 @app.route("/calendario")
 def calendario():
-    return render_template("calendario.html")
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+    
+    return render_template("calendario.html", usuario=usuario)
 
 @app.route("/sobre")
 def sobre():
