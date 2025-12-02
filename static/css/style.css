@@ -131,16 +131,17 @@ body {
 }
 
 .layout.profile-container {
-    display: fixed;
-    left: 10px;
-    top: 50px;
+    position: fixed;
+    right: 10px;
+    top: 60px;
     width: 350px;
     height: 150px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    color: white;
-    transition: left 0.3s;
+    background-color: white;
+    transition: opacity 0.3s;
     opacity: 0;
+    z-index: 1000;
 }
 
 .layout.profile-container.active {
@@ -148,6 +149,7 @@ body {
 }
 
 .layout.profile-flex {
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,15 +157,21 @@ body {
 
 .layout.profile-icon {
     color: red;
-    height: 140px;
-    width: 140px;
+    height: 130px;
+    width: 130px;
 }
 
 .layout.profile-info {
     display: flex;
     flex-direction: column;
-    width: 190px;
-    height: 140px;
+    width: 200px;
+    height: 130px;
+}
+
+.layout.profile-info * {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px;
 }
 
 .layout.sidebar {
@@ -206,6 +214,46 @@ body {
 
 .layout.sidebar ul li a:hover {
     background: darkred;
+}
+
+.layout.menu {
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+.layout.menu:hover {
+    color: silver;
+}
+
+.layout.profile {
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+.layout.profile:hover {
+    color: silver;
+}
+
+.layout.search-bar {
+    width: 800px;
+    height: 40px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+}
+.layout.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 18px;
+}
+.layout.search-bar i {
+    color: red;
+    font-size: 20px;
 }
 
 /* ------------------------------------------------------------------------ calendario.html */
@@ -407,60 +455,33 @@ body.enquete {
 }
 
 .homealuno.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    position: absolute;
     font-size: 32px;
     color: red;
+    background-color: white;
     cursor: pointer;
     z-index: 2;
     margin-top: 0px; 
+    width: 40px;
+    height: 40px;
 }
-.homealuno.left {
-    position: absolute;
-    left: 60px;
+
+.homealuno.nav:hover {
+   background-color: silver; 
 }
-.homealuno.right {
+
+.homealuno#seta-left {
+    top: 200px;
+    left: 10px;
+}
+.homealuno#seta-right {
+    top: 200px;
     right: 10px;
 }
-
-.homealuno.menu {
-    font-size: 32px;
-    color: white;
-    cursor: pointer;
-}
-
-.homealuno.menu:hover {
-    color: silver;
-}
-
-.homealuno.profile {
-    font-size: 32px;
-    color: white;
-    cursor: pointer;
-}
-
-.homealuno.profile:hover {
-    color: silver;
-}
-
-.homealuno.search-bar {
-    width: 800px;
-    height: 40px;
-    background: white;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    padding: 5px 15px;
-}
-.homealuno.search-bar input {
-    border: none;
-    outline: none;
-    flex: 1;
-    font-size: 18px;
-}
-.homealuno.search-bar i {
-    color: red;
-    font-size: 20px;
-}
-
 
 /* ------------------------------------------------------------------------ homenutri.html */
 
@@ -716,6 +737,7 @@ body.resultado_calculo {
     color: white;
     margin: 0;
     padding: 0;
+    height: 100vh;
 }
 
 .sobre.gradient-container {
