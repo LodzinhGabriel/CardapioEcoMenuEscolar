@@ -7,6 +7,11 @@ function toggleProfile() {
     const profile_container = document.querySelector('.profile-container');
     profile_container.classList.toggle('active');
 }
+
+function actionLogout() {
+    let profile_container_active = document.querySelector('.profile-container.active');
+    if (profile_container_active) window.location.href = "/logout";
+}
     
 document.addEventListener("click", function(event) {
     const sidebar = document.querySelector('.sidebar');
