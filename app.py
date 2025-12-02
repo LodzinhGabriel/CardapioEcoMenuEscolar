@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
+
+# --------------------------------------------------------------------------------- Banco de Dados
+
 app.config['SECRET_KEY'] = 'meu_segredo_super_seguro'  # Usado para sessão
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Caminho do banco
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -128,10 +131,10 @@ class Enquete(db.Model):
         self.votoenquete = votoenquete
         self.opcaoenquete = opcaoenquete
 
-
-
 with app.app_context():
     db.create_all()
+
+# --------------------------------------------------------------------------------- Site Principal
 
 @app.route("/", methods=['GET', 'POST'])
 def pagina_inicial():

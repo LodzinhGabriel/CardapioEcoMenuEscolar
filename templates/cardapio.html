@@ -2,4 +2,34 @@
 
 {% block content %}
 
+<div class="cardapio body">
+    <div class="cardapio container">
+        {% if cardapio %}
+            <embed src="{{cardapio.anexo}}" type="application/pdf">
+        {% else %}
+            <div class="cardapio cardapio-vazio">
+                <h1>Atualmente nenhum cardápio foi postado ainda.</h1>
+                <p>Fique ligado, pois logo logo sairá o novo cardápio da semana!</p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="cardapio historico">
+        <h1>HISTÓRICO DE CARDÁPIOS</h1>
+        <ul>
+            {% if cardapios %}
+                {% for cardapio_selecionado in cardapios %}
+                    <li>
+                        <h1 class="cardapio">Cardápio {{cardapio_selecionado.data}}</h1>
+                        <a>Consultar</a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>
+                    <p>Ops! sem histórico de cardápios por enquanto.</p>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
 {% endblock %}
