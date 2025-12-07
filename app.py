@@ -1,7 +1,9 @@
 from flask import (Flask, render_template, request, redirect, session, url_for)
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-import os
+import os, jsonify
+from werkzeug.utils import secure_filename
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -50,7 +52,7 @@ class Calendario(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.DateTime, nullable=False)
-    anexo = db.Column(db.BLOB, nullable=False)
+    anexo = db.Column(db.String(100), nullable=False)
 
     def __init__(self, data, anexo):
         self.data = data
@@ -139,6 +141,21 @@ class Enquete(db.Model):
 with app.app_context():
     db.create_all()
 
+# --------------------------------------------------------------------------------- Funções Base
+
+def verificarEntrada(temp: str, tipo: str):
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+
+    if tipo:
+        if not usuario.tipo == tipo:
+            return redirect(url_for("pagina_inicial"))
+
+    return render_template(temp, usuario=usuario)
+
+
 # --------------------------------------------------------------------------------- Site Principal
 
 @app.route("/", methods=['GET', 'POST'])
@@ -200,48 +217,57 @@ def logout():
 
 @app.route("/aluno")
 def aluno():
-    if not session.get('usuario_id'):
-        return redirect(url_for("pagina_inicial"))
-    
-    usuario = Usuario.query.get(session["usuario_id"])
-
-    if not usuario.tipo == "aluno":
-        return redirect(url_for("pagina_inicial"))
-
-    return render_template("homealuno.html", usuario=usuario)
+    return verificarEntrada("homealuno.html", "aluno")
 
 @app.route("/nutri")
 def nutri():
-    if not session["usuario_id"]:
-        return redirect(url_for("pagina_inicial"))
-    
-    usuario = Usuario.query.get(session["usuario_id"])
-
-    if not usuario.tipo == "funcionario":
-        return redirect(url_for("pagina_inicial"))
-
-    return render_template("homenutri.html", usuario=usuario)
+    return verificarEntrada("homenutri.html", "funcionario")
 
 @app.route("/cardapio")
 def cardapio():
-    if not session.get('usuario_id'):
-        return redirect(url_for("pagina_inicial"))
-    
-    usuario = Usuario.query.get(session["usuario_id"])
-    
-    return render_template("cardapio.html", usuario=usuario)
+    return verificarEntrada("cardapio.html")
 
 @app.route("/cardapio/enviar")
 def cardapioadm():
-    if not session.get('usuario_id'):
-        return redirect(url_for("pagina_inicial"))
-    
-    usuario = Usuario.query.get(session["usuario_id"])
+    return verificarEntrada("cardapioadm.html", "funcionario")
 
-    if not usuario.tipo == "funcionario":
-        return redirect(url_for("pagina_inicial"))
+@app.route("/cardapio/enviar/upload", methods=["POST"])
+def upload():
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
+
+        if usuario:
+            if not usuario.tipo == "funcionario":
+                return redirect(url_for("pagina_inicial"))
+            
+    try:
+        if "arquivo" not in request.files:
+            arq = request.files["arquivo"]
+
+        if arq.filename == "":
+            return jsonify({"erro": "Nome vazio"}), 400
+
+        data_atual = datetime.now().strftime('%Y-%m-%d')
+
+        pasta_data = os.path.join(app.config['UPLOAD_FOLDER'], data_atual)
+
+        os.makedirs(pasta_data, exist_ok=True)
+
+        nome_seguro = secure_filename(arq.filename)
+        caminho = os.path.join(pasta_data, nome_seguro)
+        arq.save(caminho)
+
+        calendario = Calendario(
+            data=datetime.now(),
+            anexo=caminho
+        )
+
+        db.session.add(calendario)
+        db.session.commit()
+    except Exception as e:
+        return jsonify({"erro": "Ocorreu uma falha na hora de mandar seu arquivo.", "detalhamento": str(e)}), 400
     
-    return render_template("cardapioadm.html", usuario=usuario)
+    return jsonify({"mensagem": "Arquivo enviado com sucesso!"})
 
 @app.route("/calendario")
 def calendario():

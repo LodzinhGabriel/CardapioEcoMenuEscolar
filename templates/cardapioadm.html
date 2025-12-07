@@ -11,18 +11,31 @@
   </div>
 
   <div class="cardapioadm upload-box" id="cardapioadm-interactive-div">
-    <p id="erro">Erro</p>
+    <p class="deactive" id="erro">Erro</p>
     <img src="/static/imgs/cloud-upload.webp" id="nuvem" alt="Upload">
-    <p id="arquivos-saceitos">Serão aceitos os arquivos em:<br><strong>png, jpeg e pdf</strong></p>
+    <p id="arquivos-aceitos">Serão aceitos os arquivos em:<br><strong>png, jpeg e pdf</strong></p>
     <img src="" alt="" id="recebido" class="deactive">
     <embed src="" type="application/pdf" class="deactive" id="pdf-recebido">
   </div>
 
-  <input type="file" name="arquivo" id="arquivo" style="display: none;">
+  <input type="file" name="arquivo" id="arquivo" accept="application/pdf, image/png, image/jpeg" style="display: none;">
 
   <div class="cardapioadm buttons">
     <button class="cardapioadm enviar">Enviar</button>
+    <button class="cardapioadm esvaziar deactive">Esvaziar envio</button>
     <button class="cardapioadm cancelar">Cancelar</button>
+    
+  </div>
+
+  <div id="mensagem" class="cardapioadm cardapio-enviado-section deactive">
+    <div class="cardapioadm cardapio-enviado">
+      <div class="cardapioadm container-flex">
+        <div class="cardapioadm texto"><p id="texto-sucesso">Seu cardápio foi enviado com sucesso!</p></div>
+        <div class="cardapioadm botoes">
+          <div class="cardapioadm voltar">Voltar</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
