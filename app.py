@@ -1,6 +1,7 @@
 from flask import (Flask, render_template, request, redirect, session, url_for)
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+import os
 
 app = Flask(__name__)
 
@@ -9,6 +10,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'meu_segredo_super_seguro'  # Usado para sessão
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Caminho do banco
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+
+if not os.path.exists('static/uploads'):
+    os.makedirs('static/uploads')
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -201,7 +206,6 @@ def aluno():
     usuario = Usuario.query.get(session["usuario_id"])
 
     if not usuario.tipo == "aluno":
-        session["usuario_id"] == None
         return redirect(url_for("pagina_inicial"))
 
     return render_template("homealuno.html", usuario=usuario)
@@ -214,7 +218,6 @@ def nutri():
     usuario = Usuario.query.get(session["usuario_id"])
 
     if not usuario.tipo == "funcionario":
-        session["usuario_id"] == None
         return redirect(url_for("pagina_inicial"))
 
     return render_template("homenutri.html", usuario=usuario)
@@ -228,12 +231,15 @@ def cardapio():
     
     return render_template("cardapio.html", usuario=usuario)
 
-@app.route("/cardapioadm")
+@app.route("/cardapio/enviar")
 def cardapioadm():
     if not session.get('usuario_id'):
         return redirect(url_for("pagina_inicial"))
     
     usuario = Usuario.query.get(session["usuario_id"])
+
+    if not usuario.tipo == "funcionario":
+        return redirect(url_for("pagina_inicial"))
     
     return render_template("cardapioadm.html", usuario=usuario)
 
@@ -255,3 +261,20 @@ def sobre():
 
     return render_template("sobre.html", usuario=usuario)
 
+@app.errorhandler(404)
+def erro404(e):
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+
+    return render_template("erropagina.html", usuario=usuario, erro="404", descricao_erro="A pagina que você solicitou não foi encontrada. Verifique se digitou correto.")
+
+@app.errorhandler(500)
+def erro500(e):
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+
+    return render_template("erropagina.html", usuario=usuario, erro="INTERNO (500)", descricao_erro="Ocorreu uma falha interna em nosso servidores. Aguarde mais um pouco e tente novamente.")

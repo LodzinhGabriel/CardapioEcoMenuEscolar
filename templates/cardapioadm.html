@@ -1,17 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 <!-- TOPO COM LOGO E MENU -->
-<div class="cardapioadm top-bar">
-  <div class="cardapioadm menu-icon">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div class="cardapioadm logo">
-    <!-- Updated URL to SESI logo -->
-    <img src="/static/imgs/logosesiadm.png" alt="Logo SESI">
-  </div>
-</div>
+
 
 <!-- CONTEÚDO CENTRAL -->
 <div class="cardapioadm container">
@@ -20,14 +10,21 @@
     Editar cardápio
   </div>
 
-  <div class="cardapioadm upload-box">
-    <img src="/static/imgs/cloud-upload.webp" alt="Upload">
-    <p>serão aceitos os arquivos em:<br><strong>png, jpeg e pdf</strong></p>
+  <div class="cardapioadm upload-box" id="cardapioadm-interactive-div">
+    <p id="erro">Erro</p>
+    <img src="/static/imgs/cloud-upload.webp" id="nuvem" alt="Upload">
+    <p id="arquivos-saceitos">Serão aceitos os arquivos em:<br><strong>png, jpeg e pdf</strong></p>
+    <img src="" alt="" id="recebido" class="deactive">
+    <embed src="" type="application/pdf" class="deactive" id="pdf-recebido">
   </div>
 
+  <input type="file" name="arquivo" id="arquivo" style="display: none;">
+
   <div class="cardapioadm buttons">
-    <button class="cardapioadm enviar">enviar</button>
-    <button class="cardapioadm cancelar">cancelar</button>
+    <button class="cardapioadm enviar">Enviar</button>
+    <button class="cardapioadm cancelar">Cancelar</button>
   </div>
 </div>
+
+<script src="/static/js/cardapioadm.js"></script>
 {% endblock %}

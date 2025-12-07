@@ -395,6 +395,7 @@ body.cardapioadm {
     flex-direction: column;
     align-items: center;
     padding: 70px 20px;
+    min-height: 100vh;
 }
 
 .cardapioadm.edit-title {
@@ -425,16 +426,32 @@ body.cardapioadm {
     padding: 10px;
 }
 
-.cardapioadm.upload-box img {
+.cardapioadm.upload-box .nuvem {
     width: 40px;
     margin-bottom: 10px;
 }
 
-.cardapioadm.upload-box p {
+.cardapioadm.upload-box .arquivos-aceitos {
     font-size: 14px;
     color: #555;
     margin: 0;
 }
+
+.cardapioadm.upload-box #erro {
+    font-size: 14px;
+    color: #ff0000;
+    margin: 0;
+}
+
+.cardapioadm.upload-box #recebido, .cardapioadm.upload-box #pdf-recebido {
+    width: 100%;
+    height: 100%;
+}
+
+.cardapioadm.upload-box *.deactive{
+    display: none;
+}
+
 
 .cardapioadm.buttons {
     margin-top: 30px;
@@ -824,3 +841,45 @@ body.resultado_calculo {
     width: 60%;
 }
 
+/* ------------------------------------------------------------------------ erropagina.html */
+
+.erropagina.canva {
+    background: url('/static/imgs/fd_sobre.png') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+.erropagina.gradient-container {
+    background: linear-gradient(90deg, rgb(157, 30, 30), 60%, rgba(153, 35, 35, 0), 80%, rgba(153, 35, 35, 0));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 60px;
+}
+
+.erropagina.canva .erropagina.gradient-container * {
+    margin: 10px;
+    text-align: center;
+    width: 60%;
+}
+
+.erropagina.canva .erropagina.gradient-container a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    background-color: red;
+    border-radius: 5px;
+    width: 100px;
+}
