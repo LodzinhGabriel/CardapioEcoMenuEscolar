@@ -278,6 +278,10 @@ def calendario():
     
     return render_template("calendario.html", usuario=usuario)
 
+@app.route("/editar-aviso")
+def editar_aviso():
+    return verificarEntrada("aviso.html")
+
 @app.route("/sobre")
 def sobre():
     if not session.get('usuario_id'):
