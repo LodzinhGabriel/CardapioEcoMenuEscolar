@@ -7,30 +7,42 @@
 <div class="avisoadm container">
   <div class="avisoadm edit-title">
     <img src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png" alt="Lápis">
-    Editar cardápio
+    Editar aviso
   </div>
-
-  <div class="avisoadm upload-box" id="avisoadm-interactive-div">
+  
+  <div class="avisoadm campos">
     <p class="deactive" id="erro">Erro</p>
-    <img src="/static/imgs/cloud-upload.webp" id="nuvem" alt="Upload">
-    <p id="arquivos-aceitos">Serão aceitos os arquivos em:<br><strong>png, jpeg e pdf</strong></p>
-    <img src="" alt="" id="recebido" class="deactive">
-    <embed src="" type="application/pdf" class="deactive" id="pdf-recebido">
+    <label for="titulo">Titulo</label>
+    <input type="text" name="titulo" id="titulo">
+    <label for="imagem">Imagem</label>
+    <div class="avisoadm upload-box" id="avisoadm-interactive-div">
+      <p class="deactive" id="erro">Erro</p>
+      <img src="/static/imgs/cloud-upload.webp" id="nuvem" alt="Upload">
+      <p id="arquivos-aceitos">Serão aceitos os arquivos em:<br><strong>.png e .jpeg</strong></p>
+      <img src="" alt="" id="recebido" class="deactive">
+    </div>
+    <div class="avisoadm buttons">
+      <button class="avisoadm esvaziar deactive">Esvaziar imagem</button>
+    </div>
+    <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg" style="display: none;">
+    <label for="texto">Texto</label>
+    <input type="text" name="texto" id="texto">
   </div>
-
-  <input type="file" name="arquivo" id="arquivo" accept="application/pdf, image/png, image/jpeg" style="display: none;">
 
   <div class="avisoadm buttons">
     <button class="avisoadm enviar">Enviar</button>
-    <button class="avisoadm esvaziar deactive">Esvaziar envio</button>
     <button class="avisoadm cancelar">Cancelar</button>
-    
   </div>
 
-  <div id="mensagem" class="avisoadm cardapio-enviado-section deactive">
-    <div class="avisoadm cardapio-enviado">
+  <div class="avisoadm info">
+    <i class="fa fa-info-circle" aria-hidden="true"></i>
+    <p>Se houver um aviso adicionando anteriormente, ele irá ser substituido pelo novo.</p>
+  </div>
+
+  <div id="mensagem" class="avisoadm aviso-enviado-section deactive">
+    <div class="avisoadm aviso-enviado">
       <div class="avisoadm container-flex">
-        <div class="avisoadm texto"><p id="texto-sucesso">Seu cardápio foi enviado com sucesso!</p></div>
+        <div class="avisoadm texto"><p id="texto-sucesso">Seu aviso foi enviado com sucesso!</p></div>
         <div class="avisoadm botoes">
           <div class="avisoadm voltar">Voltar</div>
         </div>

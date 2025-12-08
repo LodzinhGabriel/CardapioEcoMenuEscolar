@@ -1,15 +1,11 @@
-const botao = document.getElementById('cardapioadm-interactive-div');
+const botao = document.getElementById('avisoadm-interactive-div');
 const input = document.getElementById('arquivo');
-const enviar = document.getElementsByClassName('cardapioadm enviar')[0];
-const cancelar = document.getElementsByClassName('cardapioadm cancelar')[0];
-const esvaziar = document.getElementsByClassName('cardapioadm esvaziar')[0];
+const enviar = document.getElementsByClassName('avisoadm enviar')[0];
+const esvaziar = document.getElementsByClassName('avisoadm esvaziar')[0];
+const cancelar = document.getElementsByClassName('avisoadm cancelar')[0];
 const erro = botao.querySelectorAll('#erro')[0];
-const nuvem = botao.querySelectorAll('#nuvem')[0];
-const arquivos_aceitos = botao.querySelectorAll('#arquivos-aceitos')[0];
-const embed = botao.querySelectorAll('#pdf-recebido')[0];
-const img = botao.querySelectorAll('#recebido')[0];
 const mensagem = document.getElementById('mensagem')
-const voltar = document.getElementsByClassName('cardapioadm voltar')[0];
+const voltar = document.getElementsByClassName('avisoadm voltar')[0];
 
 var contemArquivo = false
 
@@ -42,27 +38,15 @@ input.addEventListener('change', () => {
     }
 
     if (success) {
-        contemArquivo = true;
-        nuvem.classList.add('deactive');
         erro.classList.add('deactive');
-        arquivos_aceitos.classList.add('deactive');
-        esvaziar.classList.remove('deactive');
-    } else {
-        if (nuvem.classList.contains('deactive')) nuvem.classList.remove('deactive');
-        if (arquivos_aceitos.classList.contains('deactive')) arquivos_aceitos.classList.remove('deactive');
     }
 });
 
 cancelar.addEventListener('click', () => {
     window.location.href = "/nutri";
 });
-
 esvaziar.addEventListener('click', () => {
     contemArquivo = false;
-    if (nuvem.classList.contains('deactive')) nuvem.classList.remove('deactive');
-    if (arquivos_aceitos.classList.contains('deactive')) arquivos_aceitos.classList.remove('deactive');
-    if (!embed.classList.contains('deactive')) embed.classList.add('deactive');
-    if (!img.classList.contains('deactive')) img.classList.add('deactive');
     esvaziar.classList.add('deactive');
 })
 

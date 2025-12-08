@@ -1,0 +1,88 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<body class="desperdicioadm">
+    <!-- TOPO -->
+    <header class="desperdicioadm top-bar">
+        <div class="desperdicioadm logo">
+            <img src="https://i.ibb.co/6y2k2qN/sesi-logo.png" alt="Logo SESI">
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="desperdicioadm container">
+        <section class="desperdicioadm calculation-box">
+            <h1 class="desperdicioadm calculation-title">CALCULO DE DESPERDICIO</h1>
+            
+            <!-- SEÇÃO DE SELEÇÃO -->
+            <div class="desperdicioadm select-group">
+                <div class="desperdicioadm select-wrapper">
+                    <label for="divisao-select" class="desperdicioadm input-label">Divisão</label>
+                    <select id="divisao-select" class="desperdicioadm input-field-select">
+                        <option value="">Selecione...</option>
+                        <option value="Normais">Normais</option>
+                        <option value="Esporte">Esporte</option>
+                        <option value="Personaliza">Personaliza</option>
+                    </select>
+                </div>
+                
+                <div class="desperdicioadm select-wrapper">
+                    <label for="ano-select" class="desperdicioadm input-label">Ano</label>
+                    <select id="ano-select" class="desperdicioadm input-field-select">
+                        <option value="">Selecione...</option>
+                        <option value="1º Ano">1º Ano</option>
+                        <option value="2º Ano">2º Ano</option>
+                        <option value="3º Ano">3º Ano</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="desperdicioadm input-group">
+                <label for="alunos-comeram" class="desperdicioadm input-label">Quantos Alunos Comeram?</label>
+                <input type="number" id="alunos-comeram" class="desperdicioadm input-field" placeholder="Ex: 27">
+            </div>
+            
+            <div class="desperdicioadm input-group">
+                <label for="comida-feita" class="desperdicioadm input-label">Quantos kg comida foi feito?</label>
+                <input type="number" id="comida-feita" class="desperdicioadm input-field" placeholder="Ex: 15kg">
+            </div>
+            
+            <div class="desperdicioadm input-group">
+                <label for="sobrado-desperdicio" class="desperdicioadm input-label">Sobrado/Desperdício</label>
+                <input type="number" id="sobrado-desperdicio" class="desperdicioadm input-field" placeholder="Ex: 3kg">
+            </div>
+            
+            <div class="desperdicioadm buttons">
+                <button id="enviar-btn" class="desperdicioadm submit-button">Enviar</button>
+            </div>
+
+            <!-- NOVA SEÇÃO PARA EXIBIR O RESULTADO NA PÁGINA -->
+            <div id="resultado-container" class="desperdicioadm resultado-container deactive">
+                <h3 class="desperdicioadm resultado-titulo">Resultado do Cálculo</h3>
+                <p class="desperdicioadm resultado-texto">
+                    Percentual de Desperdício: <strong><span id="valor-percentual"></span>%</strong>
+                </p>
+                <p class="desperdicioadm resultado-texto">
+                    Média por Aluno: <strong><span id="valor-media"></span> kg</strong>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- MENSAGEM DE SUCESSO (Modal) -->
+    <div id="mensagem-modal" class="desperdicioadm cardapio-enviado-section deactive">
+        <div class="desperdicioadm cardapio-enviado">
+            <div class="desperdicioadm container-flex">
+                <div class="desperdicioadm texto">
+                    <p id="mensagem-texto">Dados de desperdício salvos com sucesso!</p>
+                </div>
+                <div class="desperdicioadm botoes">
+                    <button id="fechar-mensagem-btn" class="desperdicioadm voltar">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/desperdicioadm.js"></script>
+</body>
+{% endblock %}

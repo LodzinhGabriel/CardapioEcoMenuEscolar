@@ -371,7 +371,6 @@ body.cardapioadm {
 }
 
 .cardapioadm.logo {
-
     padding: 4px 16px;
     border-left: 4px solid #c80000;
     border-right: 4px solid #c80000;
@@ -380,24 +379,6 @@ body.cardapioadm {
 .cardapioadm.logo img {
     height: 55px; /* Adjust as necessary for clarity */
     object-fit: contain;
-}
-
-/* MENU HAMBÚRGUER */
-.cardapioadm.menu-icon {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-}
-
-.cardapioadm.menu-icon div {
-    width: 24px;
-    height: 5px;
-    background: black;
-    border-radius: 3px;
 }
 
 /* CONTEÚDO PRINCIPAL */
@@ -565,14 +546,534 @@ body.cardapioadm {
     }
 }
 
-/* ------------------------------------------------------------------------ enquete.html */
+/* ----------------------------------------------------------------------- avisoadm.html */
 
-body.enquete {
-    background: url('/static/imgs/fundo_enq.jpg') no-repeat center center fixed;
-    background-size: cover;
+.avisoadm.container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 70px 20px;
+    min-height: 100vh;
+}
+
+.avisoadm.edit-title {
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.avisoadm.edit-title img {
+    width: 20px;
+    height: 20px;
+}
+
+.avisoadm.campos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.avisoadm.campos label {
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+.avisoadm.upload-box, .avisoadm.campos input {
+    border: 2px dashed #00aaff;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.avisoadm.upload-box {
+    min-width: 700px;
+    min-height: 350px;
+}
+
+.avisoadm.campos input {
+    width: 100%;
+    min-height: 50px;
+}
+
+.avisoadm.campos input#texto {
+    min-height: 200px;
+}
+
+.avisoadm.buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.avisoadm.buttons button {
+    padding: 20px 80px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s;
+}
+
+.avisoadm.aviso-enviado-section {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avisoadm.aviso-enviado {
+    width: 350px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    z-index: 1000;
+}
+
+.avisoadm.container-flex {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avisoadm.container-flex .botoes {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.avisoadm.container-flex .texto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.avisoadm.container-flex .texto p {
+    font-weight: bold;
+}
+
+.avisoadm.container-flex .voltar {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 15px;
+    background-color: red;
+    border-radius: 5px;
+}
+
+.avisoadm.container-flex .voltar:hover {
+    background-color: maroon;
+    cursor: pointer;
+}
+
+@media (max-width: 400px) {
+    .avisoadm.upload-box {
+    width: 100%;
+    }
+
+    .avisoadm.buttons {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    }
+
+    .avisoadm.buttons button {
+    width: 80%;
+    }
+}
+
+/* ------------------------------------------------------------------------ desperdicioadm.html */
+
+.desperdicioadm * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.desperdicioadm {
+    font-family: Arial, Helvetica, sans-serif;
+    background: url('https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat fixed;
+    min-height: 100vh;
+    position: relative;
+}
+
+body.desperdicioadm::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.desperdicioadm.top-bar {
+    background-color: #c80000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.desperdicioadm.logo {
+    background-color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+.desperdicioadm.logo img {
+    height: 50px;
+    object-fit: contain;
+}
+
+.desperdicioadm.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: calc(100vh - 70px);
+}
+
+.desperdicioadm.calculation-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.desperdicioadm.calculation-title {
+    color: #c80000;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.desperdicioadm.select-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.desperdicioadm.select-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.desperdicioadm.input-field-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+.desperdicioadm.input-field-select:focus {
+    outline: none;
+    border-color: #c80000;
+    background-color: #fff;
+}
+
+.desperdicioadm.input-group {
+    margin-bottom: 20px;
+}
+
+.desperdicioadm.input-label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+.desperdicioadm.input-field {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #f4f4f4;
+}
+
+.desperdicioadm.input-field:focus {
+    outline: none;
+    border-color: #c80000;
+    background-color: #fff;
+}
+
+.desperdicioadm.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.desperdicioadm.submit-button {
+    background-color: #e0e0e0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.desperdicioadm.submit-button:hover {
+    background-color: #d0d0d0;
+}
+
+/* --- ESTILOS DA NOVA SEÇÃO DE RESULTADO --- */
+.desperdicioadm.resultado-container {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-left: 5px solid #c80000; /* Borda de destaque */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.desperdicioadm.resultado-container.deactive {
+    display: none;
+}
+
+.desperdicioadm.resultado-titulo {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.desperdicioadm.resultado-texto {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #555;
+}
+
+.desperdicioadm.resultado-texto strong {
+    color: #c80000;
+}
+
+/* --- ESTILOS DO MODAL --- */
+.desperdicioadm.cardapio-enviado-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.desperdicioadm.cardapio-enviado-section.deactive {
+    display: none;
+}
+
+.desperdicioadm.cardapio-enviado {
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    z-index: 1001;
+}
+
+.desperdicioadm.container-flex {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.desperdicioadm.container-flex .texto p {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.desperdicioadm.container-flex .botoes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.desperdicioadm.container-flex .voltar {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 10px 25px;
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.desperdicioadm.container-flex .voltar:hover {
+    background-color: maroon;
+}
+
+@media (max-width: 500px) {
+    .desperdicioadm.calculation-box {
+        padding: 25px 20px;
+    }
+    .desperdicioadm.select-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .desperdicioadm.buttons {
+        justify-content: center;
+    }
+    .desperdicioadm.submit-button {
+        width: 100%;
+    }
+}
+
+/* ------------------------------------------------------------------------ enquete.html */
+
+.enquete * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.enquete-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.enquete-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #e63946;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.enquete-title {
+    color: white;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.enquete-question {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.enquete-opcoes-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.enquete-opcao {
+    background-color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.enquete-opcao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.enquete-opcao.selecionado {
+    background-color: #f1faee;
+    border: 2px solid #2a9d8f;
+}
+
+.enquete-enviar-btn {
+    width: 100%;
+    background-color: white;
+    color: #e63946;
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.enquete-enviar-btn:hover {
+    background-color: #f1faee;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.enquete-mensagem {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+}
+
+.enquete-mensagem.sucesso {
+    background-color: #2a9d8f;
+    color: white;
+}
+
+.enquete-mensagem.erro {
+    background-color: #e76f51;
+    color: white;
 }
 
 /* ------------------------------------------------------------------------ homealuno.html */

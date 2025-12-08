@@ -49,18 +49,19 @@
             <ul>
                 <li><a href="/aluno">Início</a></li>
                 <li><a href="/cardapio">Cardápio</a></li>
-                <li><a href="">Desperdício</a></li>
+                <li><a href="/desperdicio">Desperdício</a></li>
+                <li><a href="/enquete">Enquete</a></li>
                 <li><a href="/sobre">Sobre</a></li>
             </ul>
         {% elif usuario.tipo == 'funcionario' %}
             <ul>
                 <li><a href="/nutri">Início</a></li>
+                <li><a href="/cardapio">Cardápio</a></li>
                 <li><a href="/cardapio/enviar">Enviar Cardápio</a></li>
-                <li><a href="">Editar Desperdício</a></li>
-                <li><a href="">Editar Enquete</a></li>
-                <li><a href="/editar-aviso">Editar Aviso</a></li>
+                <li><a href="/desperdicio/enviar">Editar Desperdício</a></li>
+                <li><a href="/enquete/resultados">Enquete</a></li>
+                <li><a href="/aviso/enviar">Editar Aviso</a></li>
                 <li><a href="/sobre">Sobre</a></li>
-                <li><a href="/logout">Sair</a></li>
             </ul>
         {% endif %}
     </div>

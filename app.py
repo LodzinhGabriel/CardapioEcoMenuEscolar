@@ -269,18 +269,13 @@ def upload():
     
     return jsonify({"mensagem": "Arquivo enviado com sucesso!"})
 
-@app.route("/calendario")
-def calendario():
-    if not session.get('usuario_id'):
-        return redirect(url_for("pagina_inicial"))
-    
-    usuario = Usuario.query.get(session["usuario_id"])
-    
-    return render_template("calendario.html", usuario=usuario)
+@app.route("/desperdicio/enviar", methods=['POST'])
+def desperdicioadm():
+    return verificarEntrada("desperdicioadm.html", "funcionario")
 
-@app.route("/editar-aviso")
+@app.route("/aviso/enviar")
 def editar_aviso():
-    return verificarEntrada("aviso.html")
+    return verificarEntrada("avisoadm.html", "funcionario")
 
 @app.route("/sobre")
 def sobre():
