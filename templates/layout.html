@@ -69,9 +69,9 @@
     <div style="color: white; width: 100%; height: 50px;"></div>
     {% block content %}
     {% endblock %}
-    {% if usuario && aviso %}
-        {% if usuario.tipo == 'aluno' && aviso.ativo %}
-            {% if usuario.aviso %}
+    {% if usuario and aviso %}
+        {% if usuario.tipo == 'aluno' and aviso.ativo %}
+            {% if not usuario.aviso %}
                 <div id="mensagem" class="layout aviso-container">
                     <div class="layout aviso">
                         <h2>AVISO</h2>
@@ -80,10 +80,11 @@
                             {% if not aviso.imagem == "" %}
                                 <img class="layout aviso-imagem" src="{{ aviso.imagem }}">
                             {% endif %}
-                            <p class="layout aviso-texto">{{ aviso.texto }}</p>
-                            <div class="layout botoes">
-                                <div class="layout fechar">Fechar</div>
-                            </div>
+                            <p class="layout aviso-texto">{{ aviso.mensagem }}</p>
+                           
+                        </div>
+                         <div class="layout botoes">
+                            <div class="layout fechar" onclick="fecharAviso()">Fechar</div>
                         </div>
                     </div>
                 </div>

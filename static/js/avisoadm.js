@@ -1,6 +1,9 @@
 const titulo = document.getElementById('titulo')
 const botao = document.getElementById('avisoadm-interactive-div');
 const input = document.getElementById('imagem');
+const nuvem = botao.querySelectorAll('#nuvem')[0];
+const arquivos_aceitos = botao.querySelectorAll('#arquivos-aceitos')[0];
+const img = botao.querySelectorAll('#recebido')[0];
 const texto = document.getElementById('texto')
 const enviar = document.getElementsByClassName('avisoadm enviar')[0];
 const esvaziar = document.getElementsByClassName('avisoadm esvaziar')[0];
@@ -14,7 +17,7 @@ var contemArquivo = false
 
 botao.addEventListener('click', () => {
     if (!contemArquivo) {
-        document.getElementById('arquivo').click();
+        input.click();
     }
 });
 
@@ -37,7 +40,10 @@ input.addEventListener('change', () => {
     }
 
     if (success) {
+        nuvem.classList.add('deactive');
+        arquivos_aceitos.classList.add('deactive');
         erro.classList.add('deactive');
+        esvaziar.classList.remove('deactive');
     }
 });
 
@@ -46,11 +52,18 @@ cancelar.addEventListener('click', () => {
 });
 esvaziar.addEventListener('click', () => {
     contemArquivo = false;
+    if (nuvem.classList.contains('deactive')) nuvem.classList.remove('deactive');
+    if (arquivos_aceitos.classList.contains('deactive')) arquivos_aceitos.classList.remove('deactive');
+    if (!img.classList.contains('deactive')) img.classList.add('deactive');
+    input.value = ""
     esvaziar.classList.add('deactive');
 })
 
 enviar.addEventListener('click', () => {
     const arq = input.files[0];
+
+    erro.classList.add('deactive');
+    erro_geral.classList.add('deactive');
 
     if (!arq) {
         if (erro.classList.contains('deactive')) erro.classList.remove('deactive');
@@ -74,11 +87,6 @@ enviar.addEventListener('click', () => {
         if (erro_geral.classList.contains('deactive')) erro_geral.classList.remove('deactive');
         erro_geral.textContent = "Texto em branco."
         return;
-    }
-
-    if (success) {
-        erro.classList.add('deactive');
-        erro_geral.classList.add('deactive');
     }
 
     const formulario = new FormData();

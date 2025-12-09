@@ -15,7 +15,7 @@ var contemArquivo = false;
 
 botao.addEventListener('click', () => {
     if (!contemArquivo) {
-        document.getElementById('arquivo').click();
+        input.click();
     }
 });
 

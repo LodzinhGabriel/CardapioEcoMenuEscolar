@@ -1,6 +1,3 @@
-const aviso = document.getElementsByClassName('layout aviso-container')[0];
-const fechar = document.getElementsByClassName('layout fechar')[0];
-
 function toggleMenu() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.classList.toggle('active');
@@ -29,7 +26,11 @@ document.addEventListener("click", function(event) {
     }
 });
 
-fechar.addEventListener('click', () => {
+
+
+function fecharAviso() {
+    const aviso = document.querySelector('.layout.aviso-container');
+
     fetch('/aviso/leitura', {
         method: 'POST',
     })
@@ -38,4 +39,4 @@ fechar.addEventListener('click', () => {
         console.log(data.mensagem || data.erro)
         aviso.classList.add('deactive');
     });
-});
+};

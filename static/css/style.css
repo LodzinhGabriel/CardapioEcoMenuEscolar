@@ -299,6 +299,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
 }
 
 .layout.aviso {
@@ -313,6 +314,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    margin-top: 10px;
 }
 
 .layout.container-flex {
@@ -325,9 +327,11 @@ body {
     align-items: center;
 }
 
-.layout.container-flex .botoes {
-    position: fixed;
-    width: 100%;
+.layout.aviso .botoes {
+    bottom: 0px;
+    max-width: 600px;
+    max-height: 65vh;
+    padding: 10px;
     display: flex;
     justify-content: end;
     align-items: end;
@@ -340,13 +344,23 @@ body {
     margin-bottom: 10px;
 }
 
-.avisoadm.container-flex .voltar {
+.layout.container-flex .aviso-texto {
+    margin-bottom: 50px;
+}
+
+.layout.aviso .fechar {
+    width: 100%;
     text-align: center;
     text-decoration: none;
     color: white;
     padding: 15px;
     background-color: red;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.layout.aviso .fechar:hover {
+    background-color: maroon;
 }
 
 /* ------------------------------------------------------------------------ calendario.html */
@@ -1093,6 +1107,7 @@ body.cardapioadm {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 .enquete-body {
@@ -1100,7 +1115,7 @@ body.cardapioadm {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background: url('/static/imgs/fundoupd.png') center/cover no-repeat;
 }
 
 .enquete-container {
@@ -1135,6 +1150,7 @@ body.cardapioadm {
 }
 
 .enquete-opcao {
+    font-family: 'Gotham';
     background-color: white;
     border: none;
     border-radius: 8px;
@@ -1190,6 +1206,100 @@ body.cardapioadm {
 .enquete-mensagem.erro {
     background-color: #e76f51;
     color: white;
+}
+
+/* ------------------------------------------------------------------------ enquete-resultados.html */
+
+/* Estilo geral da página de resultados da enquete */
+
+
+body {
+background-color: #0b0c10;
+color: #fff;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.enquete-resultados .titulo {
+font-size: 32px;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+
+.enquete-resultados .subtitulo {
+font-size: 18px;
+margin-bottom: 25px;
+color: #c5c6c7;
+}
+
+
+/* Container da tabela */
+.enquete-resultados .tabela-container {
+background: #1f2833;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.4);
+overflow-x: auto;
+}
+
+
+/* Estilo da tabela */
+.enquete-resultados .tabela-enquete {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+color: white;
+}
+
+
+.enquete-resultados .tabela-enquete thead tr {
+background-color: #45a29e;
+}
+
+
+.enquete-resultados .tabela-enquete th {
+padding: 12px;
+text-align: left;
+font-size: 16px;
+}
+
+
+.enquete-resultados .tabela-enquete td {
+padding: 10px;
+border-bottom: 1px solid #30363d;
+}
+
+
+.enquete-resultados .tabela-enquete tr:hover td {
+background-color: #162027;
+}
+
+
+/* Gráficos */
+.enquete-resultados canvas {
+background: #1f2833;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+
+/* Layout responsivo */
+@media (max-width: 700px) {
+    .enquete-resultados .titulo {
+        font-size: 26px;
+    }
+
+
+    .enquete-resultados .subtitulo {
+        font-size: 16px;
+    }
+
+
+    canvas {
+        padding: 10px;
+    }
 }
 
 /* ------------------------------------------------------------------------ homealuno.html */

@@ -3,51 +3,59 @@ const opcoes = document.querySelectorAll('.enquete-opcao');
 const enviarBtn = document.getElementById('enquete-enviar');
 const mensagem = document.getElementById('enquete-mensagem');
 
-// Array para armazenar as opções selecionadas
-let diasSelecionados = [];
+// Variável para armazenar a única opção selecionada
+let diaSelecionado = null;
 
 // Adicionar evento de clique a cada opção
 opcoes.forEach(opcao => {
     opcao.addEventListener('click', function() {
         const dia = this.getAttribute('data-dia');
-        
-        // Verificar se o dia já está selecionado
-        const index = diasSelecionados.indexOf(dia);
-        
-        if (index > -1) {
-            // Se já está selecionado, remover
-            diasSelecionados.splice(index, 1);
+
+        // Se já está selecionada, desmarca
+        if (diaSelecionado === dia) {
+            diaSelecionado = null;
             this.classList.remove('selecionado');
-        } else {
-            // Se não está selecionado, adicionar
-            diasSelecionados.push(dia);
-            this.classList.add('selecionado');
+            return;
         }
+
+        // Limpar seleção anterior
+        opcoes.forEach(o => o.classList.remove('selecionado'));
+
+        // Marcar nova opção
+        diaSelecionado = dia;
+        this.classList.add('selecionado');
     });
 });
 
 // Evento de clique no botão enviar
 enviarBtn.addEventListener('click', function() {
-    // Verificar se pelo menos uma opção foi selecionada
-    if (diasSelecionados.length === 0) {
-        exibirMensagem('Por favor, selecione pelo menos uma opção.', 'erro');
+    if (!diaSelecionado) {
+        exibirMensagem('Por favor, selecione uma opção.', 'erro');
         return;
     }
-    
-    // Simular envio dos dados
-    // Em um cenário real, você faria uma requisição AJAX aqui
-    console.log('Dias selecionados:', diasSelecionados);
-    
-    // Simular resposta do servidor
-    setTimeout(() => {
-        exibirMensagem('Obrigado por participar da nossa enquete!', 'sucesso');
-        
+
+    console.log('Dia selecionado:', diaSelecionado);
+
+    const formulario = new FormData()
+
+    formulario.append('dia', diaSelecionado)
+
+    fetch('/enquete/voto', {
+        method: 'POST',
+        body: formulario,
+    })
+    .then(res => res.json())
+    .then((data) => {
+        console.log(data.mensagem || data.erro)
+
+        exibirMensagem(data.mensagem || data.erro, data.erro == null ? 'erro' : 'sucesso');
+
         // Limpar seleção após 2 segundos
         setTimeout(() => {
             limparSelecao();
             ocultarMensagem();
         }, 2000);
-    }, 500);
+    });
 });
 
 // Função para exibir mensagem
@@ -64,7 +72,7 @@ function ocultarMensagem() {
 
 // Função para limpar seleção
 function limparSelecao() {
-    diasSelecionados = [];
+    diaSelecionado = null;
     opcoes.forEach(opcao => {
         opcao.classList.remove('selecionado');
     });

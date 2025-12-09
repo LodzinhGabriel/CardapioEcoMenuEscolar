@@ -28,7 +28,7 @@ class Usuario(db.Model):
     tipo = db.Column(db.String(10), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
-    aviso = db.Column(db.Boolean)
+    aviso = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, nome, tipo, email, senha, aviso):
         self.nome = nome
@@ -71,12 +71,11 @@ class Voto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, nullable=False)
     semana = db.Column(db.Integer, nullable=False)
-    opcao = db.Column(db.Integer, nullable=False)
+    opcao = db.Column(db.String(15), nullable=False)
 
-    def __init__(self, id_usuario, semana, votoenquete, opcao):
+    def __init__(self, id_usuario, semana, opcao):
         self.id_usuario = id_usuario
         self.semana = semana
-        self.votoenquete = votoenquete
         self.opcao = opcao
 
 with app.app_context():
@@ -115,12 +114,12 @@ def pagina_inicial():
     aluno = Usuario.query.filter_by(email='aluno@portalsesisp.org.br').first()
 
     if not funcionario:
-        funcionario = Usuario(nome='funcionario', tipo='funcionario', email='funcionario@portalsesisp.org.br', senha='funcionario')
+        funcionario = Usuario(nome='funcionario', tipo='funcionario', email='funcionario@portalsesisp.org.br', senha='funcionario', aviso=False)
         db.session.add(funcionario)
         db.session.commit()
         
     if not aluno:
-        aluno = Usuario(nome='aluno', tipo='aluno', email='aluno@portalsesisp.org.br', senha='aluno')
+        aluno = Usuario(nome='aluno', tipo='aluno', email='aluno@portalsesisp.org.br', senha='aluno', aviso=False)
         db.session.add(aluno)
         db.session.commit()
 
@@ -187,13 +186,55 @@ def enquete():
 
 # --------------------------------------------------------------------------------- Envio do voto (interno, aluno)
 
+@app.route("/enquete/voto", methods=['POST'])
+def voto():
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
 
+        if usuario:
+            if not usuario.tipo == "aluno":
+                return redirect(url_for("pagina_inicial"))
+            
+    try:
+        if "dia" not in request.form:
+            return jsonify({"erro": "Respota do cliente vazia"}), 400
+
+        dia = request.form.get('dia')
+
+        if dia == "":
+            return jsonify({"erro": "Dia vazio"}), 400
+
+        semana_atual = datetime.now().isocalendar().week
+
+        voto = Voto(
+            id_usuario = session.get('usuario_id'),
+            semana = semana_atual,
+            opcao = dia
+        )
+
+        db.session.add(voto)
+        db.session.commit()
+        return jsonify({"mensagem": "Voto enviado com sucesso!"})
+    except Exception as e:
+        print(e)
+        return jsonify({"erro": "Ocorreu uma falha na hora de mandar seu voto.", "detalhamento": str(e)}), 400
 
 # --------------------------------------------------------------------------------- Enquete (nutrição)
 
 @app.route("/enquete/resultados")
 def enquete_resultados():
-    return verificarEntrada("enqueteadm.html", "funcionario")
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
+
+        if usuario:
+            if not usuario.tipo == "funcionario":
+                return redirect(url_for("pagina_inicial"))
+            
+    votos = Voto.query.all()  
+    # Cada item deve ter: usuario_id, semana, opcao
+
+    return render_template("enquete_resultados.html", usuario=usuario, votos=votos)
+
 
 # --------------------------------------------------------------------------------- Cardápio
 
@@ -292,7 +333,8 @@ def aviso_leitura():
 
         if usuario:
             if usuario.tipo == "aluno":
-                usuario.aviso = False
+                usuario.aviso = True
+                db.session.commit()
                 return jsonify({"mensagem": "Aviso lido com sucesso!"})
 
     return jsonify({"erro": "Usuario não é aluno ou não está registrado."})
@@ -305,7 +347,7 @@ def editar_aviso():
 
 # --------------------------------------------------------------------------------- Envio do Aviso (interno, nutrição)
 
-@app.route("aviso/enviar/upload")
+@app.route("/aviso/enviar/upload", methods=['POST'])
 def enviar_aviso():
     if session.get('usuario_id'):
         usuario = Usuario.query.get(session['usuario_id'])
