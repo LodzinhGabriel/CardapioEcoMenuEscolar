@@ -28,12 +28,14 @@ class Usuario(db.Model):
     tipo = db.Column(db.String(10), nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
+    aviso = db.Column(db.Boolean)
 
-    def __init__(self, nome, tipo, email, senha):
+    def __init__(self, nome, tipo, email, senha, aviso):
         self.nome = nome
         self.tipo = tipo
         self.email = email
         self.senha = senha
+        self.aviso = aviso
 
 class Calendario(db.Model):
     __tablename__ = 'calendario'
@@ -80,6 +82,15 @@ class Voto(db.Model):
 with app.app_context():
     db.create_all()
 
+# ===================================== DADOS AVISO ==============================================
+
+aviso_principal = {
+    "ativo": False,
+    "titulo": "",
+    "imagem": "",
+    "mensagem": ""
+}
+
 # ===================================== FUNCÕES BASE ===========================================
 
 def verificarEntrada(temp: str, tipo: str):
@@ -92,8 +103,7 @@ def verificarEntrada(temp: str, tipo: str):
         if not usuario.tipo == tipo:
             return redirect(url_for("pagina_inicial"))
 
-    return render_template(temp, usuario=usuario)
-
+    return render_template(temp, usuario=usuario, aviso=aviso_principal)
 
 # ===================================== SITE PRINCIPAL ===========================================
 
@@ -207,7 +217,7 @@ def cardapio():
 
     print(outrosCardapios)
 
-    return render_template("cardapio.html", usuario=usuario, cardapio=cardapioAtual, cardapios=outrosCardapios)
+    return render_template("cardapio.html", usuario=usuario, cardapio=cardapioAtual, cardapios=outrosCardapios, aviso=aviso_principal)
 
 # --------------------------------------------------------------------------------- Cardápio (nutrição)
 
@@ -273,6 +283,20 @@ def desperdicioadm():
 
 
 
+# --------------------------------------------------------------------------------- Leitura do Aviso (interno, aluno)
+
+@app.route("/aviso/leitura", methods=['POST'])
+def aviso_leitura():
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
+
+        if usuario:
+            if usuario.tipo == "aluno":
+                usuario.aviso = False
+                return jsonify({"mensagem": "Aviso lido com sucesso!"})
+
+    return jsonify({"erro": "Usuario não é aluno ou não está registrado."})
+
 # --------------------------------------------------------------------------------- Aviso (nutrição)
 
 @app.route("/aviso/enviar")
@@ -281,18 +305,57 @@ def editar_aviso():
 
 # --------------------------------------------------------------------------------- Envio do Aviso (interno, nutrição)
 
+@app.route("aviso/enviar/upload")
+def enviar_aviso():
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
 
+        if usuario:
+            if not usuario.tipo == "funcionario":
+                return redirect(url_for("pagina_inicial"))
+            
+    if "titulo" not in request.form:
+        return jsonify({"erro": "Titulo vazio"}), 400
+            
+    if "imagem" not in request.files:
+            return jsonify({"erro": "Imagem vazia"}), 400
+    
+    if "texto" not in request.form:
+            return jsonify({"erro": "Texto vazio"}), 400
+    
+    titulo = request.form.get('titulo')
+    imagem = request.files.get('imagem')
+    texto = request.form.get('texto')
+
+    if imagem.filename == "":
+        return jsonify({"erro": "Nome vazio"}), 400
+
+    data_atual = datetime.now().strftime('%Y-%m-%d')
+
+    pasta_data = os.path.join(app.config['UPLOAD_FOLDER'], data_atual)
+
+    os.makedirs(pasta_data, exist_ok=True)
+
+    nome_seguro = secure_filename(imagem.filename)
+    caminho = os.path.join(pasta_data, nome_seguro)
+    imagem.save(caminho)
+    
+    aviso_principal["titulo"] = titulo
+    aviso_principal["imagem"] = caminho
+    aviso_principal["mensagem"] = texto
+
+    aviso_principal["ativo"] = True
+
+    Usuario.query.update({Usuario.aviso: False})
+    db.session.commit()
+
+    return jsonify({"mensagem": "Aviso criado com sucesso!"})
 
 # --------------------------------------------------------------------------------- Sobre
 
 @app.route("/sobre")
 def sobre():
-    if not session.get('usuario_id'):
-        return redirect(url_for("pagina_inicial"))
-    
-    usuario = Usuario.query.get(session["usuario_id"])
-
-    return render_template("sobre.html", usuario=usuario)
+    return verificarEntrada("sobre.html")
 
 # --------------------------------------------------------------------------------- Paginas de apoio para erros internos
 

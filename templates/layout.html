@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -70,6 +69,27 @@
     <div style="color: white; width: 100%; height: 50px;"></div>
     {% block content %}
     {% endblock %}
+    {% if usuario && aviso %}
+        {% if usuario.tipo == 'aluno' && aviso.ativo %}
+            {% if usuario.aviso %}
+                <div id="mensagem" class="layout aviso-container">
+                    <div class="layout aviso">
+                        <h2>AVISO</h2>
+                        <div class="layout container-flex">
+                            <h1 class="layout aviso-titulo">{{ aviso.titulo }}</h1>
+                            {% if not aviso.imagem == "" %}
+                                <img class="layout aviso-imagem" src="{{ aviso.imagem }}">
+                            {% endif %}
+                            <p class="layout aviso-texto">{{ aviso.texto }}</p>
+                            <div class="layout botoes">
+                                <div class="layout fechar">Fechar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
     <div class="layout footer">
         <img src="/static/imgs/sesilogo.jpg" width="200px">
         <div class="layout adress">
