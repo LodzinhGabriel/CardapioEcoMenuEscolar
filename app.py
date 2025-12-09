@@ -1,13 +1,14 @@
 from flask import (Flask, render_template, request, redirect, session, url_for)
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-import os, jsonify
+import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
+from flask import jsonify
 
 app = Flask(__name__)
 
-# --------------------------------------------------------------------------------- Banco de Dados
+# ===================================== BANCO DE DADOOS ===========================================
 
 app.config['SECRET_KEY'] = 'meu_segredo_super_seguro'  # Usado para sessão
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  # Caminho do banco
@@ -34,19 +35,6 @@ class Usuario(db.Model):
         self.email = email
         self.senha = senha
 
-
-class Meta(db.Model):
-    __tablename__ = 'meta'
-
-    id = db.Column(db.Integer, primary_key=True)
-    ano = db.Column(db.Integer, nullable=False)
-    valor = db.Column(db.Float, nullable=False)
-
-    def __init__(self, ano, valor):
-        self.ano = ano
-        self.valor = valor
-        
-
 class Calendario(db.Model):
     __tablename__ = 'calendario'
 
@@ -62,13 +50,15 @@ class Desperdicio(db.Model):
     __tablename__ = 'desperdicio'
 
     id = db.Column(db.Integer, primary_key=True)
-    total = db.Column(db.Float, nullable=False)
+    data = db.Column(db.DateTime, nullable=False)
+    turma = db.Column(db.String, nullable=False)
     qtdAlunos = db.Column(db.Integer, nullable=False)
     sobras = db.Column(db.Float, nullable=False)
     comidaFeita = db.Column(db.Float, nullable=False)
 
-    def __init__(self, total, qtdAlunos, sobras, comidaFeita):
-        self.total = total
+    def __init__(self, data, turma, qtdAlunos, sobras, comidaFeita):
+        self.data = data
+        self.turma = turma
         self.qtdAlunos = qtdAlunos
         self.sobras = sobras
         self.comidaFeita = comidaFeita
@@ -78,70 +68,19 @@ class Voto(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, nullable=False)
-    voto_enquete = db.Column(db.Integer, nullable=False)
+    semana = db.Column(db.Integer, nullable=False)
     opcao = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, usuario, votoenquete, opcao):
-        self.usuario = usuario
+    def __init__(self, id_usuario, semana, votoenquete, opcao):
+        self.id_usuario = id_usuario
+        self.semana = semana
         self.votoenquete = votoenquete
         self.opcao = opcao
-    
-
-class VotoEnquete(db.Model):
-    __tablename__ = 'votoenquete'
-
-    id = db.Column(db.Integer, primary_key=True)
-    enquete = db.Column(db.Integer, nullable=False)
-    voto = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, enquete, voto):
-        self.enquete = enquete
-        self.voto = voto
-
-class Opcao(db.Model):
-    __tablename__ = 'opcao'
-
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(20), nullable=False)
-    opcaoenquete = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, nome, opcaoenquete):
-        self.nome = nome
-        self.opcaoenquete = opcaoenquete
-
-class OpcaoEnquete(db.Model):
-    __tablename__ = 'opcaoenquete'
-
-    id = db.Column(db.Integer, primary_key=True)
-    enquete = db.Column(db.Integer, nullable=False)
-    opcao = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, enquete, opcao):
-        self.enquete = enquete
-        self.opcao = opcao
-        
-    
-class Enquete(db.Model):
-    __tablename__ = 'enquete'
-
-    id = db.Column(db.Integer, primary_key=True)
-    titulo = db.Column(db.String(20), nullable=False)
-    data_inicio = db.Column(db.DateTime, nullable=False)
-    data_fim = db.Column(db.DateTime, nullable=False)
-    votoenquete = db.Column(db.Integer, nullable=False)
-    opcaoenquete = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, titulo, data_inicio, data_fim, votoenquete, opcaoenquete):
-        self.titulo = titulo
-        self.data_inicio = data_inicio
-        self.data_fim = data_fim
-        self.votoenquete = votoenquete
-        self.opcaoenquete = opcaoenquete
 
 with app.app_context():
     db.create_all()
 
-# --------------------------------------------------------------------------------- Funções Base
+# ===================================== FUNCÕES BASE ===========================================
 
 def verificarEntrada(temp: str, tipo: str):
     if not session.get('usuario_id'):
@@ -156,7 +95,9 @@ def verificarEntrada(temp: str, tipo: str):
     return render_template(temp, usuario=usuario)
 
 
-# --------------------------------------------------------------------------------- Site Principal
+# ===================================== SITE PRINCIPAL ===========================================
+
+# --------------------------------------------------------------------------------- Página Inicial
 
 @app.route("/", methods=['GET', 'POST'])
 def pagina_inicial():
@@ -208,28 +149,73 @@ def pagina_inicial():
 
     return render_template("paginainicial.html")
 
+# --------------------------------------------------------------------------------- Sair (interno)
+
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     session.clear()
 
     return redirect(url_for("pagina_inicial"))
 
+# --------------------------------------------------------------------------------- Página do Aluno
 
 @app.route("/aluno")
 def aluno():
     return verificarEntrada("homealuno.html", "aluno")
 
+# --------------------------------------------------------------------------------- Página da Nutrição
+
 @app.route("/nutri")
 def nutri():
     return verificarEntrada("homenutri.html", "funcionario")
 
+# --------------------------------------------------------------------------------- Enquete (aluno)
+
+@app.route("/enquete")
+def enquete():
+    return verificarEntrada("enquete.html", "aluno")
+
+# --------------------------------------------------------------------------------- Envio do voto (interno, aluno)
+
+
+
+# --------------------------------------------------------------------------------- Enquete (nutrição)
+
+@app.route("/enquete/resultados")
+def enquete_resultados():
+    return verificarEntrada("enqueteadm.html", "funcionario")
+
+# --------------------------------------------------------------------------------- Cardápio
+
 @app.route("/cardapio")
 def cardapio():
-    return verificarEntrada("cardapio.html")
+    if not session.get('usuario_id'):
+        return redirect(url_for("pagina_inicial"))
+    
+    usuario = Usuario.query.get(session["usuario_id"])
+        
+    cardapios = Calendario.query.order_by(Calendario.data.desc())
+    cardapioAtual = cardapios.first()
+    outrosCardapios = []
+
+    for cardapio in cardapios:
+        outrosCardapios.append(cardapio)
+
+    del outrosCardapios[0]
+
+    print(cardapios)
+
+    print(outrosCardapios)
+
+    return render_template("cardapio.html", usuario=usuario, cardapio=cardapioAtual, cardapios=outrosCardapios)
+
+# --------------------------------------------------------------------------------- Cardápio (nutrição)
 
 @app.route("/cardapio/enviar")
 def cardapioadm():
     return verificarEntrada("cardapioadm.html", "funcionario")
+
+# --------------------------------------------------------------------------------- Envio do cardápio (interno, nutrição)
 
 @app.route("/cardapio/enviar/upload", methods=["POST"])
 def upload():
@@ -242,7 +228,9 @@ def upload():
             
     try:
         if "arquivo" not in request.files:
-            arq = request.files["arquivo"]
+            return jsonify({"erro": "Respota do cliente vazia"}), 400
+
+        arq = request.files["arquivo"]
 
         if arq.filename == "":
             return jsonify({"erro": "Nome vazio"}), 400
@@ -264,18 +252,38 @@ def upload():
 
         db.session.add(calendario)
         db.session.commit()
+        return jsonify({"mensagem": "Arquivo enviado com sucesso!"})
     except Exception as e:
+        print(e)
         return jsonify({"erro": "Ocorreu uma falha na hora de mandar seu arquivo.", "detalhamento": str(e)}), 400
     
-    return jsonify({"mensagem": "Arquivo enviado com sucesso!"})
+    
 
-@app.route("/desperdicio/enviar", methods=['POST'])
+# --------------------------------------------------------------------------------- Desperdício (aluno)
+
+
+
+# --------------------------------------------------------------------------------- Desperdício (nutrição)
+
+@app.route("/desperdicio/enviar")
 def desperdicioadm():
     return verificarEntrada("desperdicioadm.html", "funcionario")
+
+# --------------------------------------------------------------------------------- Envio do Desperdício (interno, nutrição)
+
+
+
+# --------------------------------------------------------------------------------- Aviso (nutrição)
 
 @app.route("/aviso/enviar")
 def editar_aviso():
     return verificarEntrada("avisoadm.html", "funcionario")
+
+# --------------------------------------------------------------------------------- Envio do Aviso (interno, nutrição)
+
+
+
+# --------------------------------------------------------------------------------- Sobre
 
 @app.route("/sobre")
 def sobre():
@@ -285,6 +293,8 @@ def sobre():
     usuario = Usuario.query.get(session["usuario_id"])
 
     return render_template("sobre.html", usuario=usuario)
+
+# --------------------------------------------------------------------------------- Paginas de apoio para erros internos
 
 @app.errorhandler(404)
 def erro404(e):

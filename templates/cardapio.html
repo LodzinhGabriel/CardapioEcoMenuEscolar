@@ -5,7 +5,8 @@
 <div class="cardapio body">
     <div class="cardapio container">
         {% if cardapio %}
-            <embed src="{{cardapio.anexo}}" type="application/pdf">
+            <h1>Cardápio {{ "%02d" % cardapio.data.day }}/{{ "%02d" % cardapio.data.month }}/{{ cardapio.data.year }} {{ "%02d" % cardapio.data.hour }}:{{ "%02d" % cardapio.data.minute }}</h1>
+            <embed src="{{ cardapio.anexo }}#toolbar=0&navpanes=0" type="application/pdf">
         {% else %}
             <div class="cardapio cardapio-vazio">
                 <h1>Atualmente nenhum cardápio foi postado ainda.</h1>
@@ -13,13 +14,13 @@
             </div>
         {% endif %}
     </div>
-    <div class="cardapio historico">
+    <!-- <div class="cardapio historico">
         <h1>HISTÓRICO DE CARDÁPIOS</h1>
         <ul>
             {% if cardapios %}
                 {% for cardapio_selecionado in cardapios %}
                     <li>
-                        <h1 class="cardapio">Cardápio {{cardapio_selecionado.data}}</h1>
+                        <h1 class="cardapio">Cardápio {{ "%02d" % cardapio_selecionado.data.day }}/{{ "%02d" % cardapio_selecionado.data.month }}/{{ cardapio_selecionado.data.year }} {{ "%02d" % cardapio.data.hour }}:{{ "%02d" % cardapio.data.minute }}</h1>
                         <a>Consultar</a>
                     </li>
                 {% endfor %}
@@ -29,7 +30,7 @@
                 </li>
             {% endif %}
         </ul>
-    </div>
+    </div> -->
 </div>
 
 {% endblock %}

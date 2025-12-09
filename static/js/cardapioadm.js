@@ -11,7 +11,7 @@ const img = botao.querySelectorAll('#recebido')[0];
 const mensagem = document.getElementById('mensagem')
 const voltar = document.getElementsByClassName('cardapioadm voltar')[0];
 
-var contemArquivo = false
+var contemArquivo = false;
 
 botao.addEventListener('click', () => {
     if (!contemArquivo) {
@@ -63,6 +63,7 @@ esvaziar.addEventListener('click', () => {
     if (arquivos_aceitos.classList.contains('deactive')) arquivos_aceitos.classList.remove('deactive');
     if (!embed.classList.contains('deactive')) embed.classList.add('deactive');
     if (!img.classList.contains('deactive')) img.classList.add('deactive');
+    input.value = ""
     esvaziar.classList.add('deactive');
 })
 
