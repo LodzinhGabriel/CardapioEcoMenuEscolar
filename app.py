@@ -59,7 +59,7 @@ class Desperdicio(db.Model):
     comidaFeita = db.Column(db.Float, nullable=False)
     sobras = db.Column(db.Float, nullable=False)
     percentual = db.Column(db.Float, nullable=False)
-    mediaAluno = db.Column(db.Decimal, nullable=False)
+    mediaAluno = db.Column(db.Float, nullable=False)
 
     def __init__(self, data, divisao, turma, qtdAlunos, sobras, comidaFeita, percentual, mediaAluno):
         self.data = data
