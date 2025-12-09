@@ -104,7 +104,7 @@ def verificarEntrada(temp: str, tipo: str):
     
     usuario = Usuario.query.get(session["usuario_id"])
 
-    if tipo:
+    if not tipo == None:
         if not usuario.tipo == tipo:
             return redirect(url_for("pagina_inicial"))
 
@@ -262,18 +262,8 @@ def cardapio():
         
     cardapios = Calendario.query.order_by(Calendario.data.desc())
     cardapioAtual = cardapios.first()
-    outrosCardapios = []
 
-    for cardapio in cardapios:
-        outrosCardapios.append(cardapio)
-
-    del outrosCardapios[0]
-
-    print(cardapios)
-
-    print(outrosCardapios)
-
-    return render_template("cardapio.html", usuario=usuario, cardapio=cardapioAtual, cardapios=outrosCardapios, aviso=aviso_principal)
+    return render_template("cardapio.html", usuario=usuario, cardapio=cardapioAtual, aviso=aviso_principal)
 
 # --------------------------------------------------------------------------------- Cardápio (nutrição)
 
@@ -487,7 +477,7 @@ def enviar_aviso():
 
 @app.route("/sobre")
 def sobre():
-    return verificarEntrada("sobre.html")
+    return verificarEntrada("sobre.html", None)
 
 # --------------------------------------------------------------------------------- Paginas de apoio para erros internos
 
