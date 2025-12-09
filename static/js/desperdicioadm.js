@@ -60,19 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
         resultadoContainer.classList.remove('deactive');
         
         // 5. Exibir o modal de confirmação
-        exibirMensagem();
+        
 
         // 6. Logar o objeto completo para simular envio ao servidor
         const dadosCompletos = {
             divisao: divisao,
-            ano: ano,
-            totalProduzido: totalProduzido,
-            totalDesperdicado: totalDesperdicado,
-            percentualDesperdicio: percentualDesperdicio,
-            alunosAtendidos: alunos,
-            mediaDesperdicioPorAluno: mediaPorAluno
+            turma: ano,
+            qtdAlunos: alunos,
+            comidaFeita: totalProduzido,
+            sobras: totalDesperdicado,
+            percentual: percentualDesperdicio,
+            mediaAluno: mediaPorAluno
         };
-        console.log('Dados para salvar:', dadosCompletos);
+
+        const formulario = new FormData()
+
+        formulario.append('dadosCompletos', dadosCompletos)
+        
+        fetch('/desperdicio/enviar/upload', {
+            method: 'POST',
+            body: formulario
+        })
+        .then(res => res.json())
+        .then((data) => {
+            exibirMensagem();
+            document.getElementById('mensagem-texto').innerText = data.mensagem || data.erro
+            if (data.detalhamento) console.log(data.detalhamento);
+        });
     });
 
     // --- EVENT LISTENER PARA FECHAR O MODAL ---

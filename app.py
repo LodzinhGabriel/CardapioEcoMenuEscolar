@@ -52,18 +52,24 @@ class Desperdicio(db.Model):
     __tablename__ = 'desperdicio'
 
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.DateTime, nullable=False)
+    data = db.Column(db.String, nullable=False)
+    divisao = db.Column(db.String, nullable=False)
     turma = db.Column(db.String, nullable=False)
     qtdAlunos = db.Column(db.Integer, nullable=False)
-    sobras = db.Column(db.Float, nullable=False)
     comidaFeita = db.Column(db.Float, nullable=False)
+    sobras = db.Column(db.Float, nullable=False)
+    percentual = db.Column(db.Decimal, nullable=False)
+    mediaAluno = db.Column(db.Decimal, nullable=False)
 
-    def __init__(self, data, turma, qtdAlunos, sobras, comidaFeita):
+    def __init__(self, data, divisao, turma, qtdAlunos, sobras, comidaFeita, percentual, mediaAluno):
         self.data = data
+        self.divisao = divisao
         self.turma = turma
         self.qtdAlunos = qtdAlunos
         self.sobras = sobras
         self.comidaFeita = comidaFeita
+        self.percentual = percentual
+        self.mediaAluno = mediaAluno
 
 class Voto(db.Model):
     __tablename__ = 'voto'
@@ -233,7 +239,16 @@ def enquete_resultados():
     votos = Voto.query.all()  
     # Cada item deve ter: usuario_id, semana, opcao
 
-    return render_template("enquete_resultados.html", usuario=usuario, votos=votos)
+    votos_json = [
+        {
+            "id_usuario": v.id_usuario,
+            "semana": v.semana,
+            "opcao": v.opcao
+        }
+        for v in votos
+    ]
+
+    return render_template("enquete_resultados.html", usuario=usuario, votos=votos_json)
 
 
 # --------------------------------------------------------------------------------- Cardápio
@@ -312,7 +327,48 @@ def upload():
 
 # --------------------------------------------------------------------------------- Desperdício (aluno)
 
+@app.route("/desperdicio")
+def desperdicio():
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
 
+        if usuario:
+            if not usuario.tipo == "aluno":
+                return redirect(url_for("pagina_inicial"))
+
+    # Recebe filtros da URL
+    filtro_divisao = request.args.get("divisao")
+    filtro_turma = request.args.get("turma")
+    filtro_data = request.args.get("data")
+
+    # Query base
+    query = Desperdicio.query
+
+    # Aplica filtros se existirem
+    if filtro_divisao:
+        query = query.filter_by(divisao=filtro_divisao)
+
+    if filtro_turma:
+        query = query.filter_by(turma=filtro_turma)
+
+    if filtro_data:
+        query = query.filter_by(data=filtro_data)
+
+    # Coleta resultados
+    dados = query.order_by(Desperdicio.data.desc()).all()
+
+    # Coleta listas de divisões e turmas disponíveis (para preencher os selects)
+    divisoes = sorted({d.divisao for d in Desperdicio.query.all()})
+    turmas = sorted({d.turma for d in Desperdicio.query.all()})
+
+    # Envia para o template
+    return render_template(
+        "desperdicio.html",
+        usuario=usuario,
+        dados=dados,
+        divisoes=divisoes,
+        turmas=turmas
+    )
 
 # --------------------------------------------------------------------------------- Desperdício (nutrição)
 
@@ -322,7 +378,41 @@ def desperdicioadm():
 
 # --------------------------------------------------------------------------------- Envio do Desperdício (interno, nutrição)
 
+@app.route("/desperdicio/enviar/upload")
+def desperdicioadm_upload():
+    if session.get('usuario_id'):
+        usuario = Usuario.query.get(session['usuario_id'])
 
+        if usuario:
+            if not usuario.tipo == "funcionario":
+                return redirect(url_for("pagina_inicial"))
+    
+    try:
+        if "dadosCompletos" not in request.form:
+            return jsonify({"erro": "Respota do cliente vazia"}), 400
+
+        dadosCompletos = request.form.get('dadosCompletos')
+
+        data_atual = datetime.now().strftime('%Y-%m-%d')
+
+        desperdicio = Desperdicio(
+            data = data_atual,
+            divisão = dadosCompletos.divisao,
+            turma = dadosCompletos.turma,
+            qtdAlunos = dadosCompletos.qtdAlunos,
+            sobras = dadosCompletos.sobras,
+            comidaFeita = dadosCompletos.comidaFeita,
+            percentual = dadosCompletos.percentual,
+            mediaAluno = dadosCompletos.mediaAluno
+        )
+
+        db.session.add(desperdicio)
+        db.session.commit()
+        return jsonify({"mensagem": "Desperdicio enviado com sucesso!"})
+    except Exception as e:
+        print(e)
+        return jsonify({"erro": "Ocorreu uma falha na hora de mandar seu calculo.", "detalhamento": str(e)}), 400
+    
 
 # --------------------------------------------------------------------------------- Leitura do Aviso (interno, aluno)
 

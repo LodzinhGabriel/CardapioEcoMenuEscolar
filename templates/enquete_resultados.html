@@ -1,41 +1,45 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="enquete-resultados" style="padding: 20px;">
-    <h1 class="enquete-resultados titulo">Resultados da Enquete</h1>
-    <p class="enquete-resultados subtitulo">Qual dia útil da semana tem as melhores refeições?</p>
 
-    <!-- Tabela de resultados -->
-    <div class="enquete-resultados tabela-container">
-        <table class="enquete-resultados tabela-enquete">
-            <thead>
-                <tr>
-                    <th>ID Usuário</th>
-                    <th>Semana</th>
-                    <th>Escolha</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for v in votos %}
-                <tr>
-                <td>{{ v.usuario_id }}</td>
-                <td>{{ v.semana }}</td>
-                <td>{{ v.opcao }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="enquete-resultados body" style="padding: 20px;">
+    <div class="enquete-resultados container">
+        <h1 class="enquete-resultados titulo">Resultados da Enquete</h1>
+        <p class="enquete-resultados subtitulo">Qual dia útil da semana tem as melhores refeições?</p>
+
+        <!-- Tabela de resultados -->
+        <div class="enquete-resultados tabela-container">
+            <table class="enquete-resultados tabela-enquete">
+                <thead>
+                    <tr>
+                        <th>ID Usuário</th>
+                        <th>Semana</th>
+                        <th>Escolha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for v in votos %}
+                    <tr>
+                    <td>{{ v.id_usuario }}</td>
+                    <td>{{ v.semana }}</td>
+                    <td>{{ v.opcao }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Gráfico de barras -->
+        <h2 style="margin-top: 40px;">Distribuição dos votos</h2>
+        <canvas id="graficoBarras" height="120"></canvas>
+
+
+        <!-- Gráfico de pizza -->
+        <h2 style="margin-top: 40px;">Porcentagem por opção</h2>
+        <canvas id="graficoPizza" height="150"></canvas>
     </div>
 
-
-    <!-- Gráfico de barras -->
-    <h2 style="margin-top: 40px;">Distribuição dos votos</h2>
-    <canvas id="graficoBarras" height="120"></canvas>
-
-
-    <!-- Gráfico de pizza -->
-    <h2 style="margin-top: 40px;">Porcentagem por opção</h2>
-    <canvas id="graficoPizza" height="150"></canvas>
 </div>
 
 

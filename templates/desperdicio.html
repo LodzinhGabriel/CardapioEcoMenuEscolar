@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="desperdicio" style="padding:20px;">
+<h1 class="desperdicio titulo">Desperdício - Relatórios</h1>
+<p class="desperdicio subtitulo">Selecione filtros para visualizar os dados registrados pelos funcionários.</p>
+
+
+<!-- Filtros -->
+<div class="desperdicio filtros-container">
+<form method="GET">
+<label>Divisão:</label>
+<select name="divisao" class="desperdicio filtro-input">
+<option value="">Todas</option>
+{% for d in divisoes %}
+<option value="{{ d }}" {% if request.args.get('divisao') == d %}selected{% endif %}>{{ d }}</option>
+{% endfor %}
+</select>
+
+
+<label>Turma:</label>
+<select name="turma" class="desperdicio filtro-input">
+<option value="">Todas</option>
+{% for t in turmas %}
+<option value="{{ t }}" {% if request.args.get('turma') == t %}selected{% endif %}>{{ t }}</option>
+{% endfor %}
+</select>
+
+
+<label>Data:</label>
+<input type="date" name="data" class="desperdicio filtro-input" value="{{ request.args.get('data','') }}">
+
+
+<button type="submit" class="desperdicio botao-filtrar">Filtrar</button>
+</form>
+</div>
+
+
+<!-- Tabela de resultados -->
+<div class="desperdicio tabela-container">
+<table class="desperdicio tabela-desperdicio">
+<thead>
+<tr>
+<th>Data</th>
+<th>Divisão</th>
+<th>Turma</th>
+<th>Qtd Alunos</th>
+<th>Sobras (kg)</th>
+<th>Comida Feita (kg)</th>
+<th>Percentual (%)</th>
+<th>Média por Aluno (g)</th>
+</tr>
+</thead>
+<tbody>
+{% for d in dados %}
+<tr>
+<td>{{ d.data }}</td>
+<td>{{ d.divisao }}</td>
+<td>{{ d.turma }}</td>
+<td>{{ d.qtdAlunos }}</td>
+<td>{{ d.sobras }}</td>
+<td>{{ d.comidaFeita }}</td>
+<td>{{ d.percentual }}</td>
+<td>{{ d.mediaAluno }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+
+</div>
+
+
+{% endblock %}

@@ -837,6 +837,100 @@ body.cardapioadm {
     }
 }
 
+/* ------------------------------------------------------------------------ desperdicio.html */
+
+/* Escopo da página Desperdicio */
+.desperdicio {
+color: white;
+padding: 20px;
+background: url('/static/imgs/fundoupd.png') center/cover no-repeat fixed;
+}
+
+
+.desperdicio .titulo {
+font-size: 32px;
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+
+.desperdicio .subtitulo {
+font-size: 18px;
+margin-bottom: 25px;
+color: #c5c6c7;
+}
+
+
+/* Filtros */
+.desperdicio .filtros-container {
+background: #1f2833;
+padding: 15px;
+border-radius: 10px;
+margin-bottom: 25px;
+box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+
+.desperdicio .filtro-input {
+padding: 8px;
+margin-right: 10px;
+border-radius: 5px;
+border: none;
+background: #0b0c10;
+color: white;
+}
+
+
+.desperdicio .botao-filtrar {
+padding: 10px 18px;
+background: #45a29e;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+color: white;
+font-weight: bold;
+}
+
+
+.desperdicio .botao-filtrar:hover {
+background: #3d8e8a;
+}
+
+
+/* Tabela */
+.desperdicio .tabela-container {
+background: #1f2833;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.4);
+overflow-x: auto;
+}
+
+
+.desperdicio .tabela-desperdicio {
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
+}
+
+
+.desperdicio .tabela-desperdicio th {
+background: #45a29e;
+padding: 12px;
+text-align: left;
+}
+
+
+.desperdicio .tabela-desperdicio td {
+padding: 10px;
+border-bottom: 1px solid #30363d;
+}
+
+
+.desperdicio .tabela-desperdicio tr:hover td {
+background-color: #162027;
+}
+
 /* ------------------------------------------------------------------------ desperdicioadm.html */
 
 .desperdicioadm * {
@@ -1212,49 +1306,57 @@ body.cardapioadm {
 
 /* Estilo geral da página de resultados da enquete */
 
-
-body {
-background-color: #0b0c10;
-color: #fff;
-font-family: Arial, Helvetica, sans-serif;
+.enquete-resultados.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('/static/imgs/fundoupd.png') center/cover no-repeat;
 }
 
+.enquete-resultados.container {
+    width: 800px;
+}
 
 .enquete-resultados .titulo {
-font-size: 32px;
-font-weight: bold;
-margin-bottom: 5px;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
 }
 
 
 .enquete-resultados .subtitulo {
-font-size: 18px;
-margin-bottom: 25px;
-color: #c5c6c7;
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: white;
 }
 
+.enquete-resultados.container h2 {
+    color: white;
+}
 
 /* Container da tabela */
 .enquete-resultados .tabela-container {
-background: #1f2833;
-padding: 15px;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0,0,0,0.4);
-overflow-x: auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    overflow-x: auto;
 }
 
 
 /* Estilo da tabela */
 .enquete-resultados .tabela-enquete {
-width: 100%;
-border-collapse: collapse;
-margin-top: 10px;
-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
 
 
 .enquete-resultados .tabela-enquete thead tr {
-background-color: #45a29e;
+    background-color: #ff0000;
+    color: white;
 }
 
 
@@ -1266,22 +1368,22 @@ font-size: 16px;
 
 
 .enquete-resultados .tabela-enquete td {
-padding: 10px;
-border-bottom: 1px solid #30363d;
+    padding: 10px;
+    border-bottom: 1px solid #30363d;
 }
 
 
 .enquete-resultados .tabela-enquete tr:hover td {
-background-color: #162027;
+    background-color: #ffffff;
 }
 
 
 /* Gráficos */
 .enquete-resultados canvas {
-background: #1f2833;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
 
